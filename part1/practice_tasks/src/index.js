@@ -1,35 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-const Hello = ({ name, age }) => {
-  const bornYear = () => new Date().getFullYear() - age
-
+const App = (props) => {
+	const {counter} = props
   return (
-    <div>
-      <p>
-        Hello {name}, you are {age} years old
-      </p>
-      <p>So you were probably born in {bornYear()}</p>
-    </div>
-  )
+    <div>{counter}</div>
+	)
 }
-
-const App = () => {
-  const nimi = 'Pekka'
-  const ika = 10
-
-  return (
-    <>
-      <h1>Greetings</h1>
-      <Hello name="Maya" age={26+10} />
-      <Hello name={nimi} age={ika} />
-    </>
-  )
-}
+  
+let counter = 1
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+    <React.StrictMode>
+      <App counter={counter} />
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
