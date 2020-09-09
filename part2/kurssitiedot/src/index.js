@@ -1,20 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-const Header = (props) => {
-  return <h1>{props.course}</h1>
-}
+const Header = ({ course }) => (
+  <h1>{course}</h1>
+)
 
-const Part = (props) => {
-  return (
-    <>
-      <p>{props.part.name} {props.part.exercises}</p>
-    </>
-  )
-}
+const Part = ({ part }) => (
+  <p>{part.name} {part.exercises}</p>
+)
 
-const Content = (props) => {
-  const content = props.parts.map((item, i) =>
+const Content = ({ parts }) => {
+  const content = parts.map((item, i) =>
     <Part part={item} key={i}/>
   )
 
@@ -25,26 +21,22 @@ const Content = (props) => {
   )
 }
 
-const Total = (props) => {
-  const sum = props.parts.reduce((accumulator, value) => 
+const Total = ({ parts }) => {
+  const sum = parts.reduce((accumulator, value) => 
                                 accumulator + value.exercises, 0)
 
   return (
-    <>
-      <p>Number of exercises {sum}</p>
-    </>
+    <p>Number of exercises {sum}</p>
   )
 }
 
-const Course = ({ course }) => {
-  return (
-    <>
-      <Header course={course.name} />
-      <Content parts={course.parts} />
-      <Total parts={course.parts} />
-    </>
-  )
-}
+const Course = ({ course }) => (
+  <>
+    <Header course={course.name} />
+    <Content parts={course.parts} />
+    <Total parts={course.parts} />
+  </>
+)
 
 const App = () => {
   const course = {
@@ -65,6 +57,11 @@ const App = () => {
         name: 'State of a component',
         exercises: 14,
         id: 3
+      },
+      {
+        name: 'Redux',
+        exercises: 11,
+        id: 4
       }
     ]
   }
