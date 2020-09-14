@@ -17,6 +17,9 @@ const Weather = ({ city }) => {
 			})
   }, [api_url])
 
+  if (city === undefined || city === '') {
+    return <p>No weather data because no capital city found.</p>
+  }
   if (Object.keys(weatherData).length === 0 && weatherData.constructor === Object) {
     return <></>
   } else {
