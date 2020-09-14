@@ -9,7 +9,7 @@ const Countries = ({ filterCountries, countryDetails, setCountryDetails }) => {
   }
 
   if (filterCountries.length > 10) {
-    return <p>too many</p>
+    return <p>Too many matches, specify another filter</p>
   } else if (filterCountries.length === 1) {
     return <Country country={filterCountries[0]} />
   }
