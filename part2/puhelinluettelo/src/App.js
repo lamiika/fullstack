@@ -6,7 +6,7 @@ import Persons from './components/Persons'
 
 const App = () => {
 	const [ searchInput, setSearchInput ] = useState('')
-  const [ persons, setPersons] = useState([])
+  const [ persons, setPersons ] = useState([])
 	const [ newName, setNewName ] = useState('')
 	const [ newNumber, setNewNumber ] = useState('')
 
