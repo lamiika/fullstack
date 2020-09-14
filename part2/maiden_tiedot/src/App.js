@@ -6,6 +6,7 @@ import Countries from './components/Countries'
 const App = () => {
 	const [countries, setCountries] = useState([])
 	const [searchInput, setSearchInput] = useState('')
+	const [countryDetails, setCountryDetails] = useState({})
 
 	useEffect(() => {
 		axios
@@ -20,8 +21,16 @@ const App = () => {
 
 	return (
 		<div>
-			<Filter searchInput={searchInput} setSearchInput={setSearchInput} />
-			<Countries filterCountries={filterCountries} />
+			<Filter 
+				searchInput={searchInput} 
+				setSearchInput={setSearchInput} 
+				setCountryDetails={setCountryDetails} 
+			/>
+			<Countries 
+				filterCountries={filterCountries} 
+				countryDetails={countryDetails} 
+				setCountryDetails={setCountryDetails}
+			/>
 		</div>
 	)
 }

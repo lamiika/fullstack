@@ -1,7 +1,13 @@
 import React from 'react'
 import Country from './Country'
+import Button from './Button'
 
-const Countries = ({ filterCountries }) => {
+const Countries = ({ filterCountries, countryDetails, setCountryDetails }) => {
+  const showCountryDetails = (country) => (event) => {
+    event.preventDefault()
+    setCountryDetails(country)
+  }
+
   if (filterCountries.length > 10) {
     return <p>too many</p>
   } else if (filterCountries.length === 1) {
@@ -10,9 +16,12 @@ const Countries = ({ filterCountries }) => {
 
   return (
     <div>
-      {filterCountries.map(country =>
-        <p key={country.name}>{country.name}</p>
-      )}
+    <Country country={countryDetails} />
+      <div>
+        {filterCountries.map(country =>
+          <p key={country.name}>{country.name}<Button text="show" handleClick={showCountryDetails(country)} /></p>
+        )}
+      </div>
     </div>
   )
 }
