@@ -16,8 +16,8 @@ const App = () => {
 			.then(initialPersons => {
 				setPersons(initialPersons)
 			})
-	}, [])
-	
+  }, [])
+
 	const filterNames = persons.filter(person => 
 		person.name.toLowerCase().includes(searchInput.toLowerCase()))
 
@@ -40,7 +40,16 @@ const App = () => {
           setNewNumber('')
         })
     }
-	}
+  }
+  
+  const removePerson = (event, id) => {
+    event.preventDefault()
+    personService
+      .remove(id)
+      .then(remainingPersons => {
+        setPersons(remainingPersons)
+      })
+  }
 
   return (
     <div>
@@ -53,7 +62,7 @@ const App = () => {
 				addPerson={addPerson}
 			/>
       <h3>Numbers</h3>
-			<Persons filterNames={filterNames} />
+			<Persons filterNames={filterNames} removePerson={removePerson} />
     </div>
   )
 }
