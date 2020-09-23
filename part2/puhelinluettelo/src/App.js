@@ -42,13 +42,15 @@ const App = () => {
     }
   }
   
-  const removePerson = (event, id) => {
+  const removePerson = (event, id, name) => {
     event.preventDefault()
-    personService
+    if (window.confirm(`Delete ${name}?`)) {
+      personService
       .remove(id)
       .then(remainingPersons => {
         setPersons(remainingPersons)
       })
+    }
   }
 
   return (
