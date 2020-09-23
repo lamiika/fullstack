@@ -30,7 +30,7 @@ const App = () => {
     }
     
     if (persons.find(person => person.name.toLowerCase() === newName.toLowerCase())) {
-      alert(`${newName} is already added to phonebook`)
+      updateNumber(personObject)
     } else {
       personService
         .create(personObject)
@@ -38,6 +38,17 @@ const App = () => {
           setPersons(persons.concat(returnedPerson))
           setNewName('')
           setNewNumber('')
+        })
+    }
+  }
+
+  const updateNumber = (personObject) => {
+    if (window.confirm(`${personObject.name} is already added to phonebook, replace the old number with a new one?`)) {
+      console.log('hey')
+      personService
+        .updateNumber(personObject)
+        .then(updatedPersons => {
+          setPersons(updatedPersons)
         })
     }
   }
