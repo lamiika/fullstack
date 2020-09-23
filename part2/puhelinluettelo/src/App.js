@@ -11,6 +11,15 @@ const App = () => {
 	const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ message, setMessage ] = useState(null)
+  const [ messageStyle, setMessageStyle ] = useState({
+    color: 'blue',
+    background: 'lightgrey',
+    fontSize: '20px',
+    borderStyle: 'solid',
+    borderRadius: '5px',
+    padding: '10px',
+    marginBottom: '10px'
+  })
 
 	useEffect(() => {
 		personService
@@ -20,13 +29,12 @@ const App = () => {
 			})
   }, [])
 
-  const showNotification = (content) => {
-    setMessage(
-      content
-    )
+  const showNotification = (content, color, time) => {
+    setMessage(content)
+    setMessageStyle({ ...messageStyle, color: color })
     setTimeout(() => {
       setMessage(null)
-    }, 2000)
+    }, time * 1000)
   }
 
 	const filterNames = persons.filter(person => 
@@ -49,7 +57,7 @@ const App = () => {
           setPersons(persons.concat(returnedPerson))
           setNewName('')
           setNewNumber('')
-          showNotification(`Added ${personObject.name}`)
+          showNotification(`Added ${personObject.name}`, 'green', 2)
         })
     }
   }
@@ -63,7 +71,10 @@ const App = () => {
           setPersons(updatedPersons)
           setNewName('')
           setNewNumber('')
-          showNotification(`Updated ${personObject.name}'s phone number`)
+          showNotification(`Updated ${personObject.name}'s phone number`, 'green', 2)
+        })
+        .catch(error => {
+          showNotification(`Information of ${personObject.name} has already been removed from server`, 'red', 4)
         })
     }
   }
@@ -75,7 +86,7 @@ const App = () => {
       .remove(id)
       .then(remainingPersons => {
         setPersons(remainingPersons)
-        showNotification(`Deleted ${name} from phonebook`)
+        showNotification(`Deleted ${name} from phonebook`, 'green', 2)
       })
     }
   }
@@ -83,7 +94,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={message} />
+      <Notification message={message} style={messageStyle} />
 			<Filter searchInput={searchInput} setSearchInput={setSearchInput} />
 			<h3>add a new</h3>
 			<PersonForm 
