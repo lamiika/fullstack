@@ -3,12 +3,14 @@ import personService from './services/persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import Notification from './components/Notification'
 
 const App = () => {
 	const [ searchInput, setSearchInput ] = useState('')
   const [ persons, setPersons ] = useState([])
 	const [ newName, setNewName ] = useState('')
-	const [ newNumber, setNewNumber ] = useState('')
+  const [ newNumber, setNewNumber ] = useState('')
+  const [ message, setMessage ] = useState(null)
 
 	useEffect(() => {
 		personService
@@ -17,6 +19,15 @@ const App = () => {
 				setPersons(initialPersons)
 			})
   }, [])
+
+  const showNotification = (content) => {
+    setMessage(
+      content
+    )
+    setTimeout(() => {
+      setMessage(null)
+    }, 2000)
+  }
 
 	const filterNames = persons.filter(person => 
 		person.name.toLowerCase().includes(searchInput.toLowerCase()))
@@ -38,6 +49,7 @@ const App = () => {
           setPersons(persons.concat(returnedPerson))
           setNewName('')
           setNewNumber('')
+          showNotification(`Added ${personObject.name}`)
         })
     }
   }
@@ -49,6 +61,9 @@ const App = () => {
         .updateNumber(personObject)
         .then(updatedPersons => {
           setPersons(updatedPersons)
+          setNewName('')
+          setNewNumber('')
+          showNotification(`Updated ${personObject.name}'s phone number`)
         })
     }
   }
@@ -60,6 +75,7 @@ const App = () => {
       .remove(id)
       .then(remainingPersons => {
         setPersons(remainingPersons)
+        showNotification(`Deleted ${name} from phonebook`)
       })
     }
   }
@@ -67,6 +83,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={message} />
 			<Filter searchInput={searchInput} setSearchInput={setSearchInput} />
 			<h3>add a new</h3>
 			<PersonForm 
