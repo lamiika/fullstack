@@ -1,0 +1,24 @@
+{
+  "persons": [
+    {
+      "name": "Arto Hellas",
+      "number": "er",
+      "id": "Arto Hellas"
+    },
+    {
+      "name": "Ada Lovelace",
+      "number": "39-44-5323523",
+      "id": "Ada Lovelace"
+    },
+    {
+      "name": "wefr",
+      "number": "erg",
+      "id": "wefr"
+    },
+    {
+      "name": "seg",
+      "number": "er",
+      "id": "seg"
+    }
+  ]
+}
