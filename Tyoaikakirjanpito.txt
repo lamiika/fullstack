@@ -1,6 +1,6 @@
 Työaikakirjanpito 2020
 Päivä  | Aika   | Aloitus | Lopetus | Tauot  | Mitä tein
-Koko   | 35:48h | 27.4.   | -       |        | -
+Koko   | 38:14h | 27.4.   | 25.09.  |        | -
 27.04. | 01:57h | 14:06   | 16:46   | 43m    | Part 0
 29.04. |        | 14:45   |         |        |
 11.08. | 00:45h | 12:24   |         | 01:45h | Part 0
@@ -24,4 +24,4 @@ Koko   | 35:48h | 27.4.   | -       |        | -
 Päivä  | Aika   | Aloitus | Lopetus | Tauot  | Mitä tein
 24.09. | 00:37h | 07:23   | 08:00   | 00:00h | Part 3 a
 24.09. | 00:52h | 18:40   | 20:02   | 00:30h | Part 3 a
-25.09. | 00:00h | 11:35   | 00:00   | 00:10h | Part 3 a
+25.09. | 02:26h | 11:35   | 14:16   | 00:15h | Part 3 a
