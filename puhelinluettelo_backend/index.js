@@ -3,7 +3,18 @@ const app = express()
 const morgan = require('morgan')
 
 app.use(express.json())
-app.use(morgan('tiny'))
+
+morgan.token('body', (req, res) => {
+  return JSON.stringify(req.body)
+})
+
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body', {
+  skip: (req, res) =>  req.method !== 'POST'
+}))
+
+app.use(morgan('tiny', {
+  skip: (req, res) => req.method === 'POST'
+}))
 
 let persons = [
   {
@@ -53,7 +64,6 @@ app.get('/api/persons/:id', (req, res) => {
 
 app.delete('/api/persons/:id', (req, res) => {
   const id = Number(req.params.id)
-  console.log(id)
   persons = persons.filter(person => person.id !== id)
 
   res.status(204).end()
@@ -85,9 +95,10 @@ app.post('/api/persons', (req, res) => {
     name: body.name,
     number: body.number,
   }
-  console.log(person)
 
   persons = persons.concat(person)
+
+  return res.status(200)
 })
 
 const PORT = 3001
