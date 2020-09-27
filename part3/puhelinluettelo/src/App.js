@@ -53,8 +53,8 @@ const App = () => {
     } else {
       personService
         .create(personObject)
-        .then(returnedPerson => {
-          setPersons(persons.concat(returnedPerson))
+        .then(returnedPersons => {
+          setPersons(returnedPersons)
           setNewName('')
           setNewNumber('')
           showNotification(`Added ${personObject.name}`, 'green', 2)
