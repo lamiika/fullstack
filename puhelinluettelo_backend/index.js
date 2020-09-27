@@ -2,19 +2,19 @@ const express = require('express')
 const app = express()
 const morgan = require('morgan')
 
-app.use(express.json())
-
 morgan.token('body', (req, res) => {
   return JSON.stringify(req.body)
 })
 
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body', {
+app.use(morgan(':method :url :status :req[content-length] - :response-time ms :body', {
   skip: (req, res) =>  req.method !== 'POST'
 }))
 
 app.use(morgan('tiny', {
   skip: (req, res) => req.method === 'POST'
 }))
+
+app.use(express.json())
 
 let persons = [
   {
@@ -98,7 +98,7 @@ app.post('/api/persons', (req, res) => {
 
   persons = persons.concat(person)
 
-  return res.status(200)
+  return res.status(200).end()
 })
 
 const PORT = 3001
