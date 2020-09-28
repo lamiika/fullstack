@@ -11,8 +11,8 @@ const create = newObject => {
   return request.then(response => getAll())
 }
 
-const updateNumber = (replacementObject) => {
-  const request = axios.put(baseUrl + '/' + replacementObject.id, replacementObject)
+const updateNumber = (replacementObject, duplicate) => {
+  const request = axios.put(baseUrl + '/' + duplicate.id, replacementObject)
   return request.then(response => getAll())
 }
 

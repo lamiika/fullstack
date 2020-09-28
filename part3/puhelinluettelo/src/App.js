@@ -44,12 +44,13 @@ const App = () => {
 		event.preventDefault()
 		const personObject = {
 			name: newName,
-			number: newNumber,
-			id: newName
+			number: newNumber
     }
     
-    if (persons.find(person => person.name.toLowerCase() === newName.toLowerCase())) {
-      updateNumber(personObject)
+    const duplicate = persons.find(person => person.name.toLowerCase() === newName.toLowerCase())
+
+    if (duplicate) {
+      updateNumber(personObject, duplicate)
     } else {
       personService
         .create(personObject)
@@ -62,11 +63,10 @@ const App = () => {
     }
   }
 
-  const updateNumber = (personObject) => {
+  const updateNumber = (personObject, duplicate) => {
     if (window.confirm(`${personObject.name} is already added to phonebook, replace the old number with a new one?`)) {
-      console.log('hey')
       personService
-        .updateNumber(personObject)
+        .updateNumber(personObject, duplicate)
         .then(updatedPersons => {
           setPersons(updatedPersons)
           setNewName('')
