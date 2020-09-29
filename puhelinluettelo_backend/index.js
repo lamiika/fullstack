@@ -4,7 +4,6 @@ const app = express()
 const morgan = require('morgan')
 const cors = require('cors')
 const Person = require('./models/person')
-const { response } = require('express')
 
 app.use(cors())
 app.use(express.json())
@@ -109,21 +108,24 @@ app.post('/api/persons', (req, res, next) => {
   .catch(error => next(error))
 })
 
-app.put('/api/persons/:id', (req, res) => {
-  const id = Number(req.params.id)
-  const body = req.body
+app.put('/api/persons/:id', (req, res, next) => {
+  if (req.body.name === undefined) {
+    console.log('undefined')
+  } else {
+    const body = req.body
 
-  persons = persons.filter(person => person.id !== id)
-
-  const person = {
-    id: id,
-    name: body.name,
-    number: body.number,
+    const person = {
+      name: body.name,
+      number: body.number,
+    }
+    
+    Person.findByIdAndUpdate(req.params.id, person, { new: true })
+      .then(updatedNote => {
+        res.json(updatedNote)
+        console.log(updatedNote)
+      })
+      .catch(error => next(error))
   }
-
-  persons = persons.concat(person)
-
-  return res.status(200).end()
 })
 
 const errorHandler = (error, req, res, next) => {
