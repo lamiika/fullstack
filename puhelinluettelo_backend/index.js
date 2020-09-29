@@ -66,12 +66,6 @@ app.post('/api/persons', (req, res, next) => {
     })
   }
 
-  if (persons.find(person => person.name === body.name)) {
-    return res.status(400).json({
-      error: 'name must be unique'
-    })
-  }
-
   const person = new Person({
     name: body.name,
     number: body.number,
@@ -106,7 +100,9 @@ app.put('/api/persons/:id', (req, res, next) => {
 const errorHandler = (error, req, res, next) => {
   console.error(error.message)
   if (error.name === 'CastError') {
-    return response.status(400).send({ error: 'malformatted id' })
+    return res.status(400).send({ error: 'malformatted id' })
+  } else if (error.name === 'ValidationError') {
+    return res.status(400).json({ error: error.message })
   }
 
   next(error)
