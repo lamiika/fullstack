@@ -9,16 +9,16 @@ app.use(cors())
 app.use(express.json())
 app.use(express.static('build'))
 
-morgan.token('body', (req, res) => {
+morgan.token('body', (req) => {
   return JSON.stringify(req.body)
 })
 
 app.use(morgan(':method :url :status :req[content-length] - :response-time ms :body', {
-  skip: (req, res) => req.method !== 'POST' && req.method !== 'PUT'
+  skip: (req) => req.method !== 'POST' && req.method !== 'PUT'
 }))
 
 app.use(morgan('tiny', {
-  skip: (req, res) => req.method === 'POST' && req.method === 'PUT'
+  skip: (req) => req.method === 'POST' && req.method === 'PUT'
 }))
 
 app.get('/info', (req, res) => {
@@ -29,23 +29,25 @@ app.get('/info', (req, res) => {
 })
 
 app.get('/api/persons', (req, res, next) => {
-  Person.find({}).then(persons => {
-    res.json(persons)
-  })
-  .catch(error => next(error))
+  Person.find({})
+    .then(persons => {
+      res.json(persons)
+    })
+    .catch(error => next(error))
 })
 
 app.get('/api/persons/:id', (req, res, next) => {
   console.log(req.params.id)
-  Person.findById(req.params.id).then(person => {
-    res.json(person)
-  })
-  .catch(error => next(error))
+  Person.findById(req.params.id)
+    .then(person => {
+      res.json(person)
+    })
+    .catch(error => next(error))
 })
 
 app.delete('/api/persons/:id', (req, res, next) => {
   Person.findByIdAndRemove(req.params.id)
-    .then(result => {
+    .then(() => {
       res.status(204).end()
     })
     .catch(error => next(error))
@@ -59,10 +61,11 @@ app.post('/api/persons', (req, res, next) => {
     number: body.number,
   })
 
-  person.save().then(savedPerson => {
-    res.json(savedPerson)
-  })
-  .catch(error => next(error))
+  person.save()
+    .then(savedPerson => {
+      res.json(savedPerson)
+    })
+    .catch(error => next(error))
 })
 
 app.put('/api/persons/:id', (req, res, next) => {
@@ -75,7 +78,7 @@ app.put('/api/persons/:id', (req, res, next) => {
       name: body.name,
       number: body.number,
     }
-    
+
     Person.findByIdAndUpdate(req.params.id, person, { new: true })
       .then(updatedNote => {
         res.json(updatedNote)
