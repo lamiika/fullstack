@@ -80,6 +80,28 @@ describe('router', () => {
     expect(addedBlog.likes).toBeDefined()
     expect(addedBlog.likes).toBe(0)
   })
+
+  test('if a blog doesn\'t contain a title or url, it\'s rejected', async () => {
+    const noTitle = {
+      author: 'a bird',
+      url: 'blogtastic.com'
+    }
+
+    const noUrl = {
+      title: 'bloggar',
+      author: 'a bird'
+    }
+
+    await api
+      .post('/api/blogs')
+      .send(noTitle)
+      .expect(400)
+
+    await api
+      .post('/api/blogs')
+      .send(noUrl)
+      .expect(400)
+  })
 })
 
 afterAll(() => {
