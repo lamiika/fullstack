@@ -104,6 +104,30 @@ describe('router', () => {
   })
 })
 
+describe('modifying a blog', () => {
+  test('succeeds with status code 200 and replaces the contents if id is valid', async () => {
+    const blogsAtStart = await helper.blogsInDb()
+    const blogToModify = blogsAtStart[0]
+
+    const modifiedContents = {
+      ...blogToModify,
+      likes: blogToModify.likes + 1
+    }
+
+    await api
+      .put(`/api/blogs/${blogToModify.id}`)
+      .send(modifiedContents)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+
+    const blogsAtEnd = await helper.blogsInDb()
+    const modifiedBlog = blogsAtEnd.find(blog => blog.title === modifiedContents.title)
+
+    expect(modifiedBlog.likes).toBe(modifiedContents.likes)
+    expect(modifiedBlog).toEqual(modifiedContents)
+  })
+})
+
 describe('deletion of a blog', () => {
   test('succeeds with status code 204 if id is valid', async () => {
     const blogsAtStart = await helper.blogsInDb()
