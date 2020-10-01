@@ -62,6 +62,24 @@ describe('router', () => {
     const titles = blogsAtEnd.map(b => b.title)
     expect(titles).toContain('bloggar')
   })
+
+  test('if the field likes is undefined, it\'s value is set to 0', async () => {
+    const newBlog = {
+      title: 'bloggar',
+      author: 'a bird',
+      url: 'blogtastic.com'
+    }
+
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+
+    const blogsAtEnd = await helper.blogsInDb()
+    const addedBlog = blogsAtEnd.find(blog => blog.title === 'bloggar')
+
+    expect(addedBlog.likes).toBeDefined()
+    expect(addedBlog.likes).toBe(0)
+  })
 })
 
 afterAll(() => {
