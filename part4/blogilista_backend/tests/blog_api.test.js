@@ -30,6 +30,8 @@ describe('get blogs', () => {
 })
 
 describe('addition of a blog', () => {
+  let token
+
   beforeEach(async () => {
     await User.deleteMany({})
 
@@ -37,6 +39,17 @@ describe('addition of a blog', () => {
     const user = new User({ username: 'mluukkai', passwordHash })
 
     await user.save()
+
+    const credentials = {
+      username: 'mluukkai',
+      password: 'salainen'
+    }
+
+    const userInfo = await api
+      .post('/api/login')
+      .send(credentials)
+
+    token = userInfo.body.token
   })
 
   test('the database should return an extra blog when one is added', async () => {
@@ -50,6 +63,7 @@ describe('addition of a blog', () => {
     await api
       .post('/api/blogs')
       .send(newBlog)
+      .set('Authorization', 'bearer ' + token)
 
     const blogsAtEnd = await helper.blogsInDb()
 
@@ -67,6 +81,7 @@ describe('addition of a blog', () => {
     await api
       .post('/api/blogs')
       .send(newBlog)
+      .set('Authorization', 'bearer ' + token)
       .expect(201)
       .expect('Content-Type', /application\/json/)
 
@@ -86,6 +101,7 @@ describe('addition of a blog', () => {
     await api
       .post('/api/blogs')
       .send(newBlog)
+      .set('Authorization', 'bearer ' + token)
 
     const blogsAtEnd = await helper.blogsInDb()
     const addedBlog = blogsAtEnd.find(blog => blog.title === 'bloggar')
@@ -109,11 +125,13 @@ describe('addition of a blog', () => {
       .post('/api/blogs')
       .send(noTitle)
       .expect(400)
+      .set('Authorization', 'bearer ' + token)
 
     await api
       .post('/api/blogs')
       .send(noUrl)
       .expect(400)
+      .set('Authorization', 'bearer ' + token)
   })
 })
 
