@@ -2,5 +2,7 @@
     "editor.tabSize": 2,
     "editor.detectIndentation": false,
     "editor.acceptSuggestionOnCommitCharacter": false,
-    "editor.acceptSuggestionOnEnter": "off"
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.quickSuggestions": null,
+    "editor.parameterHints.enabled": false
 }
