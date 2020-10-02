@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const supertest = require('supertest')
+const bcrypt = require('bcrypt')
 const app = require('../app')
 const helper = require('./test_helper')
 const api = supertest(app)
@@ -149,6 +150,11 @@ describe('deletion of a blog', () => {
 describe('creating a user', () => {
   beforeEach(async () => {
     await User.deleteMany()
+
+    const passwordHash = await bcrypt.hash('sekred', 10)
+    const user = new User({ username: 'root', passwordHash })
+
+    await user.save()
   })
 
   test('successful', async () => {
@@ -157,7 +163,7 @@ describe('creating a user', () => {
     const newUser = {
       username: 'mluukkai',
       name: 'Matti Luukkainen',
-      password: 'secret'
+      password: 'salainen'
     }
 
     await api
@@ -169,6 +175,64 @@ describe('creating a user', () => {
     const usersAtEnd = await helper.usersInDb()
 
     expect(usersAtEnd).toHaveLength(usersAtStart.length + 1)
+  })
+
+  test('doesn\'t work with a non-unique username', async () => {
+    const usersAtStart = await helper.usersInDb()
+
+    const newUser = {
+      username: 'root',
+      name: 'Matti Luukkainen',
+      password: 'salainen'
+    }
+
+    await api
+      .post('/api/users')
+      .send(newUser)
+      .expect(400)
+      .expect('Content-Type', /application\/json/)
+
+    const usersAtEnd = await helper.usersInDb()
+
+    expect(usersAtEnd).toHaveLength(usersAtStart.length)
+  })
+
+  test('doesn\'t work with a username below 3 characters', async () => {
+    const usersAtStart = await helper.usersInDb()
+
+    const shortUsername = {
+      username: 'ml',
+      name: 'Matti Luukkainen',
+      password: 'salainen'
+    }
+
+    await api
+      .post('/api/users')
+      .send(shortUsername)
+      .expect(400)
+
+    const usersAtEnd = await helper.usersInDb()
+
+    expect(usersAtEnd).toHaveLength(usersAtStart.length)
+  })
+
+  test('doesn\'t work with a password below 3 characters', async () => {
+    const usersAtStart = await helper.usersInDb()
+
+    const shortPassword = {
+      username: 'mluukkai',
+      name: 'Matti Luukkainen',
+      password: 'sa'
+    }
+
+    await api
+      .post('/api/users')
+      .send(shortPassword)
+      .expect(400)
+
+    const usersAtEnd = await helper.usersInDb()
+
+    expect(usersAtEnd).toHaveLength(usersAtStart.length)
   })
 })
 
