@@ -15,7 +15,7 @@ beforeEach(async () => {
   await Blog.insertMany(helper.initialBlogs)
 })
 
-describe('router', () => {
+describe('get blogs', () => {
   test('all blogs are returned', async () => {
     const result = await api.get('/api/blogs')
 
@@ -26,6 +26,17 @@ describe('router', () => {
     const result = await api.get('/api/blogs')
 
     expect(result.body[0].id).toBeDefined()
+  })
+})
+
+describe('addition of a blog', () => {
+  beforeEach(async () => {
+    await User.deleteMany({})
+
+    const passwordHash = await bcrypt.hash('salainen', 10)
+    const user = new User({ username: 'mluukkai', passwordHash })
+
+    await user.save()
   })
 
   test('the database should return an extra blog when one is added', async () => {
@@ -175,6 +186,9 @@ describe('creating a user', () => {
     const usersAtEnd = await helper.usersInDb()
 
     expect(usersAtEnd).toHaveLength(usersAtStart.length + 1)
+
+    const usernames = usersAtEnd.map(user => user.username)
+    expect(usernames).toContain(newUser.username)
   })
 
   test('doesn\'t work with a non-unique username', async () => {
