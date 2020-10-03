@@ -4,5 +4,6 @@
     "editor.acceptSuggestionOnCommitCharacter": false,
     "editor.acceptSuggestionOnEnter": "off",
     "editor.quickSuggestions": null,
-    "editor.parameterHints.enabled": false
+    "editor.parameterHints.enabled": false,
+    "eslint.enable": true
 }
