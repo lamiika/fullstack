@@ -25,18 +25,18 @@ const App = () => {
   const blogFormRef = useRef()
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
-    )
-  }, [])
-
-  useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBloglistUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
       blogService.setToken(user.token)
     }
+  }, [])
+  
+  useEffect(() => {
+    blogService.getAll().then(blogs =>
+      setBlogs( blogs )
+    )
   }, [])
 
   const createBlog = async (newBlog) => {
@@ -57,7 +57,7 @@ const App = () => {
   }
 
   const updateBlog = async (newBlog) => {
-    let index = blogs.findIndex(blog => blog.id === newBlog.id)
+    const index = blogs.findIndex(blog => blog.id === newBlog.id)
     try {
       const updatedBlog = await blogService.update(newBlog)
       const newBlogs = [ ...blogs.slice(0, index), updatedBlog, ...blogs.slice(index + 1) ]
@@ -65,6 +65,20 @@ const App = () => {
       return updatedBlog
     } catch (exception) {
       console.log(exception)
+    }
+  }
+
+  const removeBlog = async (blog) => {
+    if (window.confirm(`Remove blog ${blog.name} by ${blog.author}`)) {
+      try {
+        const response = await blogService.remove(blog)
+        const newBlogs = blogs.filter(b => b.id !== blog.id)
+        setBlogs(newBlogs)
+        const message = `Blog ${blog.title} by ${blog.author} successfully removed`
+        showNotification(message, 'green', 3)
+      } catch (exception) {
+        console.log(exception)
+      }
     }
   }
 
@@ -82,6 +96,7 @@ const App = () => {
       const user = await loginService.login({
         username, password,
       })
+      console.log(user)
 
       window.localStorage.setItem(
         'loggedBloglistUser', JSON.stringify(user)
@@ -130,7 +145,10 @@ const App = () => {
           {blogs
             .sort((a, b) => Number(b.likes) - Number(a.likes))
             .map(blog =>
-            <Blog key={blog.id} blog={blog} updateBlog={updateBlog} />
+            <Blog key={blog.id} blog={blog}
+              updateBlog={updateBlog}
+              removeBlog={removeBlog}
+              user={user} />
           )}
         </div>
       }
