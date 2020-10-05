@@ -49,8 +49,8 @@ const App = () => {
       return true
     } catch (exception) {
       console.log(exception)
-      const message = `Creating a blog failed, title and url are required. ${exception.toString()}`
-      showNotification(message, 'red', 3)
+      const message = 'Creating a blog failed, title and url are required.'
+      showNotification(message, 'red', 5)
       blogFormRef.current.toggleVisibility()
       return false
     }
@@ -111,7 +111,7 @@ const App = () => {
           <h2>blogs</h2>
           <Notification message={notificationMessage} style={messageStyle} />
           <p>{user.name} logged in <button onClick={handleLogout}>logout</button></p>
-          <Togglable buttonLabel='new blog' ref={blogFormRef}>
+          <Togglable buttonLabel='create new blog' ref={blogFormRef}>
             <h2>create new</h2>
             <BlogForm createBlog={createBlog} />
           </Togglable>
