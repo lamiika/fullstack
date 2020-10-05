@@ -56,6 +56,14 @@ const App = () => {
     }
   }
 
+  const updateBlog = async (newBlog) => {
+    try {
+      await blogService.update(newBlog)
+    } catch (exception) {
+      console.log(exception)
+    }
+  }
+
   const showNotification = (message, color, duration) => {
     setNotificationMessage(message)
     setMessageStyle({ ...messageStyle, color: color })
@@ -116,7 +124,7 @@ const App = () => {
             <BlogForm createBlog={createBlog} />
           </Togglable>
           {blogs.map(blog =>
-            <Blog key={blog.id} blog={blog} />
+            <Blog key={blog.id} blog={blog} updateBlog={updateBlog} />
           )}
         </div>
       }

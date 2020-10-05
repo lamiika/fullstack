@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-const Blog = ({ blog }) => {
+const Blog = ({ blog, updateBlog }) => {
   const [visible, setVisible] = useState(false)
   const [toggleButtonText, setToggleButtonText] = useState('view')
+  const [likes, setLikes] = useState(blog.likes)
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -26,7 +27,9 @@ const Blog = ({ blog }) => {
 
   const addLike = (event) => {
     event.preventDefault()
-    console.log(`You liked ${blog.title} by ${blog.author}`)
+    const newBlog = { ...blog, likes: likes + 1 }
+    setLikes(likes + 1)
+    updateBlog(newBlog)
   }
 
   return (
@@ -42,7 +45,7 @@ const Blog = ({ blog }) => {
           {blog.url}
         </div>
         <div>
-          likes {' '} {blog.likes} {' '}
+          likes {' '} {likes} {' '}
           <button onClick={addLike}>like</button>
         </div>
         <div>
