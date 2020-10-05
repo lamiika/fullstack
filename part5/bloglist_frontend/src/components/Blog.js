@@ -25,11 +25,11 @@ const Blog = ({ blog, updateBlog }) => {
     setVisible(!visible)
   }
 
-  const addLike = (event) => {
+  const addLike = async (event) => {
     event.preventDefault()
     const newBlog = { ...blog, likes: likes + 1 }
-    setLikes(likes + 1)
-    updateBlog(newBlog)
+    const updatedBlog = await updateBlog(newBlog)
+    setLikes(updatedBlog.likes)
   }
 
   return (

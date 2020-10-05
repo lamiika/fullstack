@@ -57,8 +57,12 @@ const App = () => {
   }
 
   const updateBlog = async (newBlog) => {
+    let index = blogs.findIndex(blog => blog.id === newBlog.id)
     try {
-      await blogService.update(newBlog)
+      const updatedBlog = await blogService.update(newBlog)
+      const newBlogs = [ ...blogs.slice(0, index), updatedBlog, ...blogs.slice(index + 1) ]
+      setBlogs(newBlogs)
+      return updatedBlog
     } catch (exception) {
       console.log(exception)
     }
@@ -123,7 +127,9 @@ const App = () => {
             <h2>create new</h2>
             <BlogForm createBlog={createBlog} />
           </Togglable>
-          {blogs.map(blog =>
+          {blogs
+            .sort((a, b) => Number(b.likes) - Number(a.likes))
+            .map(blog =>
             <Blog key={blog.id} blog={blog} updateBlog={updateBlog} />
           )}
         </div>
