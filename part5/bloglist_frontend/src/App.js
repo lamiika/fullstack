@@ -71,7 +71,7 @@ const App = () => {
   const removeBlog = async (blog) => {
     if (window.confirm(`Remove blog ${blog.name} by ${blog.author}`)) {
       try {
-        const response = await blogService.remove(blog)
+        await blogService.remove(blog)
         const newBlogs = blogs.filter(b => b.id !== blog.id)
         setBlogs(newBlogs)
         const message = `Blog ${blog.title} by ${blog.author} successfully removed`
@@ -96,7 +96,6 @@ const App = () => {
       const user = await loginService.login({
         username, password,
       })
-      console.log(user)
 
       window.localStorage.setItem(
         'loggedBloglistUser', JSON.stringify(user)
