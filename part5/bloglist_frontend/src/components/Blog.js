@@ -71,7 +71,7 @@ Blog.propTypes = {
   blog: PropTypes.object.isRequired,
   updateBlog: PropTypes.func.isRequired,
   removeBlog: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired 
+  user: PropTypes.object.isRequired
 }
 
 export default Blog

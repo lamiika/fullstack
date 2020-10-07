@@ -32,7 +32,7 @@ const App = () => {
       blogService.setToken(user.token)
     }
   }, [])
-  
+
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
@@ -87,7 +87,7 @@ const App = () => {
     setMessageStyle({ ...messageStyle, color: color })
     setTimeout(() => {
       setNotificationMessage(null)
-    }, duration * 1000);
+    }, duration * 1000)
   }
 
   const handleLogin = async (event) => {
@@ -144,11 +144,11 @@ const App = () => {
           {blogs
             .sort((a, b) => Number(b.likes) - Number(a.likes))
             .map(blog =>
-            <Blog key={blog.id} blog={blog}
-              updateBlog={updateBlog}
-              removeBlog={removeBlog}
-              user={user} />
-          )}
+              <Blog key={blog.id} blog={blog}
+                updateBlog={updateBlog}
+                removeBlog={removeBlog}
+                user={user} />
+            )}
         </div>
       }
     </div>
