@@ -43,20 +43,20 @@ const App = () => {
       setErrorMessage('Note needs to be at least 5 characters long')
       setTimeout(() => {
         setErrorMessage(null)
-      }, 2000);
+      }, 2000)
     }
   }
 
   const toggleImportanceOf = (id) => {
     const note = notes.find(n => n.id === id)
-    const changedNote = { ...note, important: !note.important}
+    const changedNote = { ...note, important: !note.important }
 
     noteService
       .update(id, changedNote)
       .then(returnedNote => {
         setNotes(notes.map(note => note.id !== id ? note : returnedNote))
       })
-      .catch(error => {
+      .catch(() => {
         setErrorMessage(
           `Note '${note.content}' was already removed from server`
         )
@@ -107,7 +107,7 @@ const App = () => {
       />
     </Togglable>
   )
-  
+
   const noteForm = () => (
     <Togglable buttonLabel='new note' ref={noteFormRef}>
       <NoteForm createNote={addNote} />
@@ -137,10 +137,10 @@ const App = () => {
         </button>
       </div>
       <ul>
-        {notesToShow.map(note => 
-          <Note 
-            key={note.id} 
-            note={note} 
+        {notesToShow.map(note =>
+          <Note
+            key={note.id}
+            note={note}
             toggleImportance={() => toggleImportanceOf(note.id)}
           />
         )}
