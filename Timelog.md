@@ -71,11 +71,13 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 07.10. | 03:27h | 16:00   | 19:59   | 00:32h | Part 5 c
 07.10. | 02:08h | 20:11   | 22:26   | 00:07h | Part 5 d
 
-<!-- . | 00:00h | :   | 00:00   | 00:00h | Part -->
+<!--
+. | 00:00h | :   | 00:00   | 00:00h | Part 
+-->
 
 Session time is calculated by comparing the times between the beginning and the end of the session and subtracting the breaks from the result.
 
 ### Goals
 - Part 6 completed by 18.10.
 - Part 7 completed by 25.10.
-- Complete the entire course by the end of November
+- Complete the entire course by the end of November (parts 8, 9 and 10)
