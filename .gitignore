@@ -24,3 +24,7 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+react-base/
+react-base1/
+node_base/
