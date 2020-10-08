@@ -1,3 +1,7 @@
 [submodule "part4/notes_backend"]
 	path = part4/notes_backend
 	url = https://github.com/lamiika/notes_backend
+
+[submodule "part3/practice_tasks/notes_backend"]
+	path = part3/practice_tasks/notes_backend
+	url = https://github.com/lamiika/notes_backend_part3
