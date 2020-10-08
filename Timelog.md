@@ -6,12 +6,12 @@ Counted until 07.10.2020, breaks not included
 ### Part 0 and 1 (12:56h)
 
 Day    | Time   | Begin   | End     | Breaks | I worked on
-:------:|:------:|:------:|:------:|:------:|:----------|
-27.04. | 01:57h | 14:06   | 16:46   | 00:43h | Part 0
-11.08. | 00:45h | 12:24   | 14:54   | 01:45h | Part 0
-12.08. | 00:30h | 12:53   | 13:33   | 00:10h | Part 0
+:------:|:------:|:------:|:------:|:------:|:------
+27.04. | 01:57h | 14:06   | 16:46   | 00:43h | Part 0 ab
+11.08. | 00:45h | 12:24   | 14:54   | 01:45h | Part 0 b
+12.08. | 00:30h | 12:53   | 13:33   | 00:10h | Part 0 b
 12.08. | 00:25h | 13:35   | 14:20   | 00:10h | Part 1 a
-21.08. | 00:09h | 13:23   | 00:00   | 00:00h | Part 1 a
+21.08. | 00:09h | 13:23   | 13:32   | 00:00h | Part 1 a
 02.09. | 01:34h | 11:15   | 13:04   | 00:15h | Part 1 ab
 03.09. | 02:28h | 10:15   | 12:53   | 00:10h | Part 1 bc
 04.09. | 02:06h | 10:45   | 13:01   | 00:10h | Part 1 cd
@@ -20,7 +20,7 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 ### Part 2 (20:53h)
 
 Day    | Time   | Begin   | End     | Breaks | I worked on
-:------:|:------:|:------:|:------:|:------:|:----------|
+:------:|:------:|:------:|:------:|:------:|:------
 09.09. | 03:11h | 09:39   | 14:35   | 01:45h | Part 2 a
 09.09. | 03:25h | 19:32   | 00:02   | 01:05h | Part 2 b
 14.09. | 08:02h | 09:45   | 20:18   | 02:31h | Part 2 c
@@ -33,7 +33,7 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 ### Part 3 (16:57h)
 
 Day    | Time   | Begin   | End     | Breaks | I worked on
-:------:|:------:|:------:|:------:|:------:|:----------|
+:------:|:------:|:------:|:------:|:------:|:------
 24.09. | 00:37h | 07:23   | 08:00   | 00:00h | Part 3 a
 24.09. | 00:52h | 18:40   | 20:02   | 00:30h | Part 3 a
 25.09. | 02:26h | 11:35   | 14:16   | 00:15h | Part 3 a
@@ -50,7 +50,7 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 ### Part 4 (20:22h)
 
 Day    | Time   | Begin   | End     | Breaks | I worked on
-:------:|:------:|:------:|:------:|:------:|:----------|
+:------:|:------:|:------:|:------:|:------:|:------
 29.09. | 01:16h | 20:30   | 21:46   | 00:00h | Part 4 a
 30.09. | 04:53h | 10:15   | 15:28   | 00:20h | Part 4 a
 30.09. | 02:26h | 17:22   | 20:08   | 00:20h | Part 4 b
@@ -62,7 +62,7 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 ### Part 5 (16:29h)
 
 Day    | Time   | Begin   | End     | Breaks | I worked on
-:------:|:------:|:------:|:------:|:------:|:----------|
+:------:|:------:|:------:|:------:|:------:|:------
 03.10. | 01:29h | 14:15   | 15:59   | 00:15h | Part 5 a
 04.10. | 02:26h | 11:47   | 14:23   | 00:10h | Part 5 a
 04.10. | 01:39h | 14:25   | 16:24   | 00:20h | Part 5 b
@@ -71,6 +71,11 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 07.10. | 03:27h | 16:00   | 19:59   | 00:32h | Part 5 c
 07.10. | 02:08h | 20:11   | 22:26   | 00:07h | Part 5 d
 
+<!-- . | 00:00h | :   | 00:00   | 00:00h | Part -->
+
 Session time is calculated by comparing the times between the beginning and the end of the session and subtracting the breaks from the result.
 
-. | 00:00h | :   | 00:00   | 00:00h | Part
+### Goals
+- Part 6 completed by 18.10.
+- Part 7 completed by 25.10.
+- Complete the entire course by the end of November
