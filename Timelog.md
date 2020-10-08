@@ -71,6 +71,6 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 07.10. | 03:27h | 16:00   | 19:59   | 00:32h | Part 5 c
 07.10. | 02:08h | 20:11   | 22:26   | 00:07h | Part 5 d
 
-The time is calculated by comparing the times between the beginning and the end of the session and subtracting the breaks from the result. Total time can be seen at the top of the log and at each parts' title.
+Session time is calculated by comparing the times between the beginning and the end of the session and subtracting the breaks from the result.
 
 . | 00:00h | :   | 00:00   | 00:00h | Part
