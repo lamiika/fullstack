@@ -1,20 +1,26 @@
-Timelog of the working hours 2020
+## Timelog of the working hours 2020
 
-Entire time used: 88:07 hours, counted until 07.10.2020
+### Entire time used: **87:37** hours
+Counted until 07.10.2020, breaks not included
 
-Day    | Time   | Start   | End     | Breaks | What was done
-27.04. | 01:57h | 14:06   | 16:46   | 43m    | Part 0
+### Part 0 and 1 (12:56h)
+
+Day    | Time   | Begin   | End     | Breaks | I worked on
+:------:|:------:|:------:|:------:|:------:|:----------|
+27.04. | 01:57h | 14:06   | 16:46   | 00:43h | Part 0
 11.08. | 00:45h | 12:24   | 14:54   | 01:45h | Part 0
 12.08. | 00:30h | 12:53   | 13:33   | 00:10h | Part 0
 12.08. | 00:25h | 13:35   | 14:20   | 00:10h | Part 1 a
 21.08. | 00:09h | 13:23   | 00:00   | 00:00h | Part 1 a
-24.08. | 00:00h | 13:11   | 00:00   | 00:00h | Part 1 a
 02.09. | 01:34h | 11:15   | 13:04   | 00:15h | Part 1 ab
 03.09. | 02:28h | 10:15   | 12:53   | 00:10h | Part 1 bc
 04.09. | 02:06h | 10:45   | 13:01   | 00:10h | Part 1 cd
 07.09. | 03:32h | 11:20   | 15:52   | 01:00h | Part 1 d
 
-Day    | Time   | Start   | End     | Breaks | What was done
+### Part 2 (20:53h)
+
+Day    | Time   | Begin   | End     | Breaks | I worked on
+:------:|:------:|:------:|:------:|:------:|:----------|
 09.09. | 03:11h | 09:39   | 14:35   | 01:45h | Part 2 a
 09.09. | 03:25h | 19:32   | 00:02   | 01:05h | Part 2 b
 14.09. | 08:02h | 09:45   | 20:18   | 02:31h | Part 2 c
@@ -24,7 +30,10 @@ Day    | Time   | Start   | End     | Breaks | What was done
 23.09. | 00:17h | 08:28   | 08:45   | 00:00h | Part 2 d
 23.09. | 01:53h | 11:02   | 12:55   | 00:00h | Part 2 e
 
-Day    | Time   | Start   | End     | Breaks | What was done
+### Part 3 (16:57h)
+
+Day    | Time   | Begin   | End     | Breaks | I worked on
+:------:|:------:|:------:|:------:|:------:|:----------|
 24.09. | 00:37h | 07:23   | 08:00   | 00:00h | Part 3 a
 24.09. | 00:52h | 18:40   | 20:02   | 00:30h | Part 3 a
 25.09. | 02:26h | 11:35   | 14:16   | 00:15h | Part 3 a
@@ -38,7 +47,10 @@ Day    | Time   | Start   | End     | Breaks | What was done
 29.09. | 03:34h | 13:17   | 17:01   | 00:10h | Part 3 c
 29.09. | 01:30h | 18:54   | 20:24   | 00:00h | Part 3 d
 
-Day    | Time   | Start   | End     | Breaks | What was done
+### Part 4 (20:22h)
+
+Day    | Time   | Begin   | End     | Breaks | I worked on
+:------:|:------:|:------:|:------:|:------:|:----------|
 29.09. | 01:16h | 20:30   | 21:46   | 00:00h | Part 4 a
 30.09. | 04:53h | 10:15   | 15:28   | 00:20h | Part 4 a
 30.09. | 02:26h | 17:22   | 20:08   | 00:20h | Part 4 b
@@ -47,7 +59,10 @@ Day    | Time   | Start   | End     | Breaks | What was done
 02.10. | 05:29h | 11:38   | 17:57   | 00:50h | Part 4 d
 03.10. | 01:15h | 12:05   | 13:28   | 00:08h | Part 4 d
 
-Day    | Time   | Start   | End     | Breaks | What was done
+### Part 5 (16:29h)
+
+Day    | Time   | Begin   | End     | Breaks | I worked on
+:------:|:------:|:------:|:------:|:------:|:----------|
 03.10. | 01:29h | 14:15   | 15:59   | 00:15h | Part 5 a
 04.10. | 02:26h | 11:47   | 14:23   | 00:10h | Part 5 a
 04.10. | 01:39h | 14:25   | 16:24   | 00:20h | Part 5 b
@@ -56,6 +71,6 @@ Day    | Time   | Start   | End     | Breaks | What was done
 07.10. | 03:27h | 16:00   | 19:59   | 00:32h | Part 5 c
 07.10. | 02:08h | 20:11   | 22:26   | 00:07h | Part 5 d
 
-00.00. | 00:00h | 00:00   | 00:00   | 00:00h | Part
+The time is calculated by comparing the times between the beginning and the end of the session and subtracting the breaks from the result. Total time can be seen at the top of the log and at each parts' title.
 
-The time is calculated by subtracting the break time from the time between the beginning and the end of the session. Total time can be seen at the top of the log
+. | 00:00h | :   | 00:00   | 00:00h | Part
