@@ -24,6 +24,7 @@ const BlogForm = ({ createBlog }) => {
           id="title"
           type="text"
           value={newBlog.title}
+          data-cy="title"
           onChange={event => handleChange(event, 'title')}
         />
       </div>
@@ -33,6 +34,7 @@ const BlogForm = ({ createBlog }) => {
           id="author"
           type="text"
           value={newBlog.author}
+          data-cy="author"
           onChange={event => handleChange(event, 'author')}
         />
       </div>
@@ -42,10 +44,13 @@ const BlogForm = ({ createBlog }) => {
           id="url"
           type="text"
           value={newBlog.url}
+          data-cy="url"
           onChange={event => handleChange(event, 'url')}
         />
       </div>
-      <button type="submit">create</button>
+      <button type="submit" data-cy="blogSubmit">
+        create
+      </button>
     </form>
   )
 }

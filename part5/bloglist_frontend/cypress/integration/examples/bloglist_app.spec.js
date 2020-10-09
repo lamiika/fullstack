@@ -34,4 +34,36 @@ describe('Blog app', function() {
         .should('have.css', 'color', 'rgb(255, 0, 0)')
     })
   })
+
+  describe.only('When logged in', function() {
+    beforeEach(function() {
+      const credentials = {
+        username: 'mluukkai',
+        password: 'salainen'
+      }
+      cy.request('POST', 'http://localhost:3001/api/login', credentials)
+        .then((response) => {
+          localStorage.setItem('loggedBloglistUser', JSON.stringify(response.body))
+          cy.visit('http://localhost:3000')
+      })
+    })
+    
+    it('A blog can be created', function() {
+      cy.contains('create new blog')
+        .click()
+      cy.get('[data-cy=title]')
+        .type('Creating a blog with Cypress')
+      cy.get('[data-cy=author]')
+        .type('Full stack developer')
+      cy.get('[data-cy=url]')
+        .type('https://github.com/lamiika')
+      cy.get('[data-cy=blogSubmit]')
+        .contains('create')
+        .click()
+      cy.get('.blogVisibleDiv')
+        .contains('Creating a blog with Cypress')
+        .contains('Full stack developer')
+        .should('be.visible')
+    })
+  })
 })
