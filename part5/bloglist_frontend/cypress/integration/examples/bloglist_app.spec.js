@@ -121,6 +121,48 @@ describe('Blog app', function() {
         cy.get('.blogVisibleDiv')
           .should('contain', 'First title')
       })
+
+      it.only('the blogs should be sorted according to likes', function() {
+        cy.get('.blogVisibleDiv:first')
+          .should('contain', 'First title')
+  
+        cy.get('.blogVisibleDiv')
+          .contains('Third title')
+          .click()
+        cy.get('.togglableInfoDiv')
+          .contains('third-url.com')
+          .parent()
+          .contains('like')
+          .click()
+        
+        cy.get('.blogVisibleDiv:first')
+          .should('contain', 'Third title')
+
+        cy.get('.blogVisibleDiv')
+          .contains('First title')
+          .click()
+        cy.get('.togglableInfoDiv')
+          .contains('first-url.com')
+          .parent()
+          .contains('like')
+          .as('firstLike')
+
+        cy.get('@firstLike')
+          .click()
+
+        cy.get('@firstLike')
+          .parent()
+          .contains('likes 1')
+
+        cy.get('@firstLike')
+          .click()
+
+        cy.get('.blogVisibleDiv:first')
+          .should('contain', 'First title')
+        cy.get('.blogVisibleDiv')
+          .eq(1)
+          .should('contain', 'Third title')
+      })
     })
   })
 })
