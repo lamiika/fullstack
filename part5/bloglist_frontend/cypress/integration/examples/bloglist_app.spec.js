@@ -35,7 +35,7 @@ describe('Blog app', function() {
     })
   })
 
-  describe.only('When logged in', function() {
+  describe('When logged in', function() {
     beforeEach(function() {
       const credentials = {
         username: 'mluukkai',
@@ -64,6 +64,33 @@ describe('Blog app', function() {
         .contains('Creating a blog with Cypress')
         .contains('Full stack developer')
         .should('be.visible')
+    })
+
+    describe('and several blogs exist', function() {
+      beforeEach(function() {
+        cy.createBlog({ title: 'First title', author: 'First author', url: 'first-url.com' })
+        cy.createBlog({ title: 'Second title', author: 'Second author', url: 'second-url.com' })
+        cy.createBlog({ title: 'Third title', author: 'Third author', url: 'third-url.com' })
+      })
+
+      it('a blog can be liked', function() {
+        cy.get('.togglableInfoDiv')
+          .contains('first-url.com')
+          .parent()
+          .as('likeDiv')
+
+        cy.get('.blogVisibleDiv')
+          .contains('First title')
+          .click()
+
+        cy.get('@likeDiv')
+          .contains('likes 0')
+        cy.get('@likeDiv')
+          .contains('like')
+          .click()
+        cy.get('@likeDiv')
+          .contains('likes 1')
+      })
     })
   })
 })
