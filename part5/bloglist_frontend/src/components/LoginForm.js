@@ -9,6 +9,7 @@ const LoginForm = ({ handleLogin, username, password, setUsername, setPassword }
         type="text"
         value={username}
         name="Username"
+        data-cy="username"
         onChange={({ target }) => setUsername(target.value)}
       />
     </div>
@@ -18,10 +19,13 @@ const LoginForm = ({ handleLogin, username, password, setUsername, setPassword }
         type="password"
         value={password}
         name="Password"
+        data-cy="password"
         onChange={({ target }) => setPassword(target.value)}
       />
     </div>
-    <button type="submit">login</button>
+    <button type="submit" data-cy="loginSubmit">
+      login
+    </button>
   </form>
 )
 

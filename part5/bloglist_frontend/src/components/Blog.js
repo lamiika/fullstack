@@ -19,7 +19,8 @@ const Blog = ({ blog, updateBlog, removeBlog, user }) => {
     MozUserSelect: 'none',
     MsUserSelect: 'none'
   }
-
+  console.log(user)
+  console.log(blog.user)
   const showWhenVisible = { display: visible ? '' : 'none' }
   const showLogoutButton = { display: user.username === blog.user.username ? '' : 'none' }
 
