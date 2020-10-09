@@ -11,6 +11,26 @@ Cypress.Commands.add('createBlog', ({ title, author, url }) => {
   cy.visit('http://localhost:3000')
 })
 
+Cypress.Commands.add('login', ({ username, password }) => {
+  localStorage.removeItem('loggedBloglistUser')
+  cy.request({
+    url: 'http://localhost:3001/api/login',
+    method: 'POST',
+    body: { username, password }
+  }).then((response) => {
+    localStorage.setItem('loggedBloglistUser', JSON.stringify(response.body))
+    cy.visit('http://localhost:3000')
+  })
+})
+
+Cypress.Commands.add('createUser', ({ username, name, password }) => {
+  cy.request({
+    url: 'http://localhost:3001/api/users/',
+    method: 'POST',
+    body: { username, name, password }
+  })
+})
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite

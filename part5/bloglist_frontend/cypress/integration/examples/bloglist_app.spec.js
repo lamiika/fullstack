@@ -6,7 +6,7 @@ describe('Blog app', function() {
       username: 'mluukkai',
       password: 'salainen'
     }
-    cy.request('POST', 'http://localhost:3001/api/users/', user)
+    cy.createUser(user)
     cy.visit('http://localhost:3000')
   })
 
@@ -41,11 +41,7 @@ describe('Blog app', function() {
         username: 'mluukkai',
         password: 'salainen'
       }
-      cy.request('POST', 'http://localhost:3001/api/login', credentials)
-        .then((response) => {
-          localStorage.setItem('loggedBloglistUser', JSON.stringify(response.body))
-          cy.visit('http://localhost:3000')
-      })
+      cy.login(credentials)
     })
     
     it('A blog can be created', function() {
@@ -101,8 +97,29 @@ describe('Blog app', function() {
           .parent()
           .contains('remove')
           .click()
-        cy.get('blogVisibleDiv')
+        cy.get('.blogVisibleDiv')
           .should('not.contain', 'First title')
+      })
+
+      it('a logged in user cannot delete a blog they didn\'t create', function() {
+        cy.createUser({ username: 'wrong', password: 'salainen', name: 'very wrong' })
+        cy.login({ username: 'wrong', password: 'salainen' })
+
+        cy.get('.togglableInfoDiv')
+          .contains('first-url.com')
+          .parent()
+          .contains('remove')
+          .as('deleteButton')
+
+        cy.get('.blogVisibleDiv')
+          .contains('First title')
+          .click()
+        cy.get('@deleteButton')
+          .should('not.be.visible')
+        cy.get('@deleteButton')
+          .click({ force: true })
+        cy.get('.blogVisibleDiv')
+          .should('contain', 'First title')
       })
     })
   })
