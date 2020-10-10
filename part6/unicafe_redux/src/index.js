@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import { createStore } from 'redux'
-import reducer from './reducer'
+import feedbackReducer from './reducers/feedbackReducer'
 
-const store = createStore(reducer)
+const store = createStore(feedbackReducer)
 
 const App = () => {
   const good = () => {

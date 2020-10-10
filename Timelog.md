@@ -77,7 +77,7 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 
 Day    | Time   | Begin   | End     | Breaks | I worked on
 :-----:|:------:|:-------:|:-------:|:------:|:------
-10.10. | 00:00h | 14:24   | 00:00   | 00:00h | Part 6a
+10.10. | 00:00h | 14:24   | 00:00   | 00:04h | Part 6a
 
 <!--
 .. | 00:00h | :   | 00:00   | 00:00h | Part 
