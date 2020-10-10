@@ -6,7 +6,7 @@ Counted until 09.10.2020, breaks not included
 ### Part 0 and 1 (12:56h)
 
 Day    | Time   | Begin   | End     | Breaks | I worked on
-:------:|:------:|:------:|:------:|:------:|:------
+:-----:|:------:|:-------:|:-------:|:------:|:------
 27.04. | 01:57h | 14:06   | 16:46   | 00:43h | Part 0 ab
 11.08. | 00:45h | 12:24   | 14:54   | 01:45h | Part 0 b
 12.08. | 00:30h | 12:53   | 13:33   | 00:10h | Part 0 b
@@ -20,7 +20,7 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 ### Part 2 (20:53h)
 
 Day    | Time   | Begin   | End     | Breaks | I worked on
-:------:|:------:|:------:|:------:|:------:|:------
+:-----:|:------:|:-------:|:-------:|:------:|:------
 09.09. | 03:11h | 09:39   | 14:35   | 01:45h | Part 2 a
 09.09. | 03:25h | 19:32   | 00:02   | 01:05h | Part 2 b
 14.09. | 08:02h | 09:45   | 20:18   | 02:31h | Part 2 c
@@ -33,7 +33,7 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 ### Part 3 (16:57h)
 
 Day    | Time   | Begin   | End     | Breaks | I worked on
-:------:|:------:|:------:|:------:|:------:|:------
+:-----:|:------:|:-------:|:-------:|:------:|:------
 24.09. | 00:37h | 07:23   | 08:00   | 00:00h | Part 3 a
 24.09. | 00:52h | 18:40   | 20:02   | 00:30h | Part 3 a
 25.09. | 02:26h | 11:35   | 14:16   | 00:15h | Part 3 a
@@ -50,7 +50,7 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 ### Part 4 (20:22h)
 
 Day    | Time   | Begin   | End     | Breaks | I worked on
-:------:|:------:|:------:|:------:|:------:|:------
+:-----:|:------:|:-------:|:-------:|:------:|:------
 29.09. | 01:16h | 20:30   | 21:46   | 00:00h | Part 4 a
 30.09. | 04:53h | 10:15   | 15:28   | 00:20h | Part 4 a
 30.09. | 02:26h | 17:22   | 20:08   | 00:20h | Part 4 b
@@ -62,7 +62,7 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 ### Part 5 (21:45h)
 
 Day    | Time   | Begin   | End     | Breaks | I worked on
-:------:|:------:|:------:|:------:|:------:|:------
+:-----:|:------:|:-------:|:-------:|:------:|:------
 03.10. | 01:29h | 14:15   | 15:59   | 00:15h | Part 5 a
 04.10. | 02:26h | 11:47   | 14:23   | 00:10h | Part 5 a
 04.10. | 01:39h | 14:25   | 16:24   | 00:20h | Part 5 b
@@ -73,11 +73,17 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 09.10. | 02:30h | 09:30   | 12:24   | 00:24h | Cypress guides
 09.10. | 02:46h | 15:28   | 18:19   | 00:05h | Part 5 d
 
+### Part 6 (00:00h)
+
+Day    | Time   | Begin   | End     | Breaks | I worked on
+:-----:|:------:|:-------:|:-------:|:------:|:------
+10.10. | 00:00h | 14:24   | 00:00   | 00:00h | Part 6a
+
 <!--
-. | 00:00h | :   | 00:00   | 00:00h | Part 
+.. | 00:00h | :   | 00:00   | 00:00h | Part 
 -->
 
-Session time is calculated by comparing the times between the beginning and the end of the session and subtracting the breaks from the result.
+Time = end - begin - breaks.
 
 ### Goals
 - Part 6 completed by 18.10.
