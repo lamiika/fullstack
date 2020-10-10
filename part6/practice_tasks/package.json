@@ -11,7 +11,8 @@
     "redux": "^4.0.5"
   },
   "devDependencies": {
-    "deep-freeze": "0.0.1"
+    "deep-freeze": "0.0.1",
+    "redux-devtools-extension": "^2.13.8"
   },
   "scripts": {
     "start": "react-scripts start",
