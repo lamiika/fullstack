@@ -6,7 +6,6 @@ const Notification = () => {
     state => state.notification.slice(-1)[0] // shows the most recent notification
   )
 
-  console.log(notification)
   const style = {
     border: 'solid',
     padding: 10,
