@@ -1,6 +1,6 @@
 ## Timelog of the working hours 2020
 
-### Entire time used: **100:42** hours
+### Entire time used: **102:07** hours
 Last updated on 12.10.2020, breaks not included
 
 ### Part 0 and 1 (12:56h)
@@ -73,7 +73,7 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 09.10. | 02:30h | 09:30   | 12:24   | 00:24h | Cypress guides
 09.10. | 02:46h | 15:28   | 18:19   | 00:05h | Part 5 d
 
-### Part 6 (07:49h)
+### Part 6 (09:14h)
 
 Day    | Time   | Begin   | End     | Breaks | I worked on
 :-----:|:------:|:-------:|:-------:|:------:|:------
@@ -81,7 +81,13 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 10.10. | 01:02h | 18:23   | 19:27   | 00:02h | Part 6 b
 11.10. | 01:32h | 15:50   | 17:26   | 00:04h | Part 6 b
 12.10. | 02:05h | 10:57   | 13:14   | 00:12h | Part 6 c
-12.10. | 00:00h | 13:49   | 14:50   | 00:05h | Part 6 d
+12.10. | 01:25h | 13:49   | 15:21   | 00:07h | Part 6 d
+
+### Part 7 (00:00h)
+
+Day    | Time   | Begin   | End     | Breaks | I worked on
+:-----:|:------:|:-------:|:-------:|:------:|:------
+| | | | | 
 
 <!--
 .10. | 00:00h | :   | 00:00   | 00:00h | Part 

@@ -20,7 +20,7 @@ const Notification = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    notification: state.notification.slice(-1)[0] // shows the most recent notification
+    notification: state.notification
   }
 }
 
