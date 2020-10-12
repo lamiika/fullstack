@@ -1,6 +1,5 @@
 import { createStore, combineReducers } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-
 import noteReducer from './noteReducer'
 import filterReducer from './filterReducer'
 
