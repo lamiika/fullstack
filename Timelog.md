@@ -87,7 +87,7 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 
 Day    | Time   | Begin   | End     | Breaks | I worked on
 :-----:|:------:|:-------:|:-------:|:------:|:------
-| | | | | 
+13.10. | 00:00h | 12:08   | 13:39   | 00:04h | Part 7 a
 
 <!--
 .10. | 00:00h | :   | 00:00   | 00:00h | Part 
