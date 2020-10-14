@@ -1,0 +1,10 @@
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sdXVra2FpIiwiaWQiOiI1Zjc3MTczNTE4ZjMzMjBjNDA1YmZlMDgiLCJpYXQiOjE2MDE2NDk0Mjl9.K_kmkeumzEp7hIk3lAlxadOMbQolPjBLbUrPO5fes0g
+
+{
+    "title": "Tuntematon Sotilas",
+    "author": "Väinö Linna",
+    "url": "tuntematonsotilas.fi",
+    "likes": 1
+}

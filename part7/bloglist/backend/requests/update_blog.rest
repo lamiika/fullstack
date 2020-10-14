@@ -1,0 +1,9 @@
+PUT http://localhost:3001/api/blogs/5f743677f5fc4f45945157c6
+Content-Type: application/json
+
+{
+    "title": "Tuntematon Sotilas",
+    "author": "Väinö Linna",
+    "url": "tuntematonsotilas.fi",
+    "likes": 2
+}
