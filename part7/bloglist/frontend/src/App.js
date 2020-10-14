@@ -7,6 +7,8 @@ import Togglable from './components/Togglable'
 import blogService from './services/blogs'
 import loginService from './services/login'
 import { initializeBlogs } from './reducers/blogReducer'
+import { showNotification } from './reducers/notificationReducer'
+import { useDispatch } from 'react-redux'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -14,16 +16,8 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [notificationMessage, setNotificationMessage] = useState(null)
-  const [messageStyle, setMessageStyle] = useState({
-    color: 'blue',
-    background: 'lightgrey',
-    fontSize: '20px',
-    borderStyle: 'solid',
-    borderRadius: '5px',
-    padding: '10px',
-    marginBottom: '10px'
-  })
   const blogFormRef = useRef()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBloglistUser')
@@ -46,12 +40,12 @@ const App = () => {
       const blog = await blogService.create(newBlog)
       setBlogs(blogs.concat(blog))
       const message = `A new blog added! ${blog.title} by ${blog.author}`
-      showNotification(message, 'green', 3)
+      dispatch(showNotification(message, 'green', 3))
       return true
     } catch (exception) {
       console.log(exception)
       const message = 'Creating a blog failed, title and url are required.'
-      showNotification(message, 'red', 5)
+      dispatch(showNotification(message, 'red', 5))
       blogFormRef.current.toggleVisibility()
       return false
     }
@@ -76,19 +70,11 @@ const App = () => {
         const newBlogs = blogs.filter(b => b.id !== blog.id)
         setBlogs(newBlogs)
         const message = `Blog ${blog.title} by ${blog.author} successfully removed`
-        showNotification(message, 'green', 3)
+        dispatch(showNotification(message, 'green', 3))
       } catch (exception) {
         console.log(exception)
       }
     }
-  }
-
-  const showNotification = (message, color, duration) => {
-    setNotificationMessage(message)
-    setMessageStyle({ ...messageStyle, color: color })
-    setTimeout(() => {
-      setNotificationMessage(null)
-    }, duration * 1000)
   }
 
   const handleLogin = async (event) => {
@@ -108,7 +94,7 @@ const App = () => {
       setPassword('')
     } catch (exception) {
       const message = 'wrong username or password'
-      showNotification(message, 'red', 2)
+      dispatch(showNotification(message, 'red', 2))
       console.log(exception)
     }
   }
@@ -127,7 +113,7 @@ const App = () => {
       {user === null ?
         <div>
           <h2>log in to application</h2>
-          <Notification message={notificationMessage} style={messageStyle} />
+          <Notification />
           <LoginForm
             handleLogin={handleLogin}
             username={username} password={password}
@@ -136,7 +122,7 @@ const App = () => {
         </div> :
         <div>
           <h2>blogs</h2>
-          <Notification message={notificationMessage} style={messageStyle} />
+          <Notification />
           <p>{user.name} logged in <button onClick={handleLogout}>logout</button></p>
           <Togglable buttonLabel='create new blog' ref={blogFormRef}>
             <h2>create new</h2>
