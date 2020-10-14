@@ -9,7 +9,7 @@ const Notification = ({ notification }) => {
 
   if (notification) {
     return (
-      <p>{notification}</p>
+      <p style={style}>{notification}</p>
     )
   }
 
