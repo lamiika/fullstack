@@ -1,5 +1,5 @@
 const initialState = {
-  message: 'hello',
+  message: null,
   style: {
     color: 'blue',
     background: 'lightgrey',

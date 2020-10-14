@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react'
-import Blog from './components/Blog'
+import React, { useState, useEffect } from 'react'
+import BlogList from './components/BlogList'
 import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
 import Notification from './components/Notification'
@@ -15,8 +15,6 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [notificationMessage, setNotificationMessage] = useState(null)
-  const blogFormRef = useRef()
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -29,27 +27,8 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
-    )
-  }, [])
-
-  const createBlog = async (newBlog) => {
-    blogFormRef.current.toggleVisibility()
-    try {
-      const blog = await blogService.create(newBlog)
-      setBlogs(blogs.concat(blog))
-      const message = `A new blog added! ${blog.title} by ${blog.author}`
-      dispatch(showNotification(message, 'green', 3))
-      return true
-    } catch (exception) {
-      console.log(exception)
-      const message = 'Creating a blog failed, title and url are required.'
-      dispatch(showNotification(message, 'red', 5))
-      blogFormRef.current.toggleVisibility()
-      return false
-    }
-  }
+    dispatch(initializeBlogs())
+  }, [dispatch])
 
   const updateBlog = async (newBlog) => {
     const index = blogs.findIndex(blog => blog.id === newBlog.id)
@@ -124,18 +103,15 @@ const App = () => {
           <h2>blogs</h2>
           <Notification />
           <p>{user.name} logged in <button onClick={handleLogout}>logout</button></p>
-          <Togglable buttonLabel='create new blog' ref={blogFormRef}>
+          <Togglable buttonLabel='create new blog'>
             <h2>create new</h2>
-            <BlogForm createBlog={createBlog} />
+            <BlogForm />
           </Togglable>
-          {blogs
-            .sort((a, b) => Number(b.likes) - Number(a.likes))
-            .map(blog =>
-              <Blog key={blog.id} blog={blog}
-                updateBlog={updateBlog}
-                removeBlog={removeBlog}
-                user={user} />
-            )}
+          <BlogList
+            updateBlog={updateBlog}
+            removeBlog={removeBlog}
+            user={user}
+          />
         </div>
       }
     </div>
