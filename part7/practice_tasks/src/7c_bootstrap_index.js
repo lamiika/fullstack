@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
+import { Table, Form, Button, Alert, Navbar, Nav } from 'react-bootstrap'
 
 import {
   BrowserRouter as Router,
@@ -18,6 +19,37 @@ const Home = () => (
   </div>
 )
 
+const NavigationBar = ({ user }) => {
+  const padding = {
+    padding: 5
+  }
+  
+  return (
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="mr-auto">
+          <Nav.Link href="#" as="span">
+            <Link style={padding} to="/">home</Link>
+          </Nav.Link>
+          <Nav.Link href="#" as="span">
+            <Link style={padding} to="/notes">notes</Link>
+          </Nav.Link>
+          <Nav.Link href="#" as="span">
+            <Link style={padding} to="/users">users</Link>
+          </Nav.Link>
+          <Nav.Link href="#" as="span">
+            {user
+              ? <em>{user} logged in</em>
+              : <Link style={padding} to="/login">login</Link>
+            }
+          </Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  )
+}
+
 const Note = ({ note }) => {
   return (
     <div>
@@ -31,13 +63,22 @@ const Note = ({ note }) => {
 const Notes = ({ notes }) => (
   <div>
     <h2>Notes</h2>
-    <ul>
-      {notes.map(note =>
-        <li key={note.id}>
-          <Link to={`/notes/${note.id}`}>{note.content}</Link>
-        </li>
-      )}
-    </ul>
+    <Table striped>
+      <tbody>
+        {notes.map(note =>
+          <tr key={note.id}>
+            <td>
+              <Link to={`/notes/${note.id}`}>
+                {note.content}
+              </Link>
+            </td>
+            <td>
+              {note.user}
+            </td>
+          </tr>
+        )}
+      </tbody>
+    </Table>
   </div>
 )
 
@@ -64,15 +105,22 @@ const Login = (props) => {
   return (
     <div>
       <h2>login</h2>
-      <form onSubmit={onSubmit}>
-        <div>
-          usename: <input />
-        </div>
-        <div>
-          password: <input type='password' />
-        </div>
-        <button type="submit">login</button>
-      </form>
+      <Form onSubmit={onSubmit}>
+        <Form.Group>
+          <Form.Label>username:</Form.Label>
+          <Form.Control
+            type="text"
+            name="username"
+          />
+          <Form.Label>password:</Form.Label>
+          <Form.Control
+            type="password"
+          />
+          <Button variant="primary" type="submit">
+            login
+          </Button>
+        </Form.Group>
+      </Form>
     </div>
   )
 }
@@ -100,13 +148,14 @@ const App = () => {
   ])
   
   const [user, setUser] = useState(null)
+  const [message, setMessage] = useState(null)
 
   const login = (user) => {
     setUser(user)
-  }
-
-  const padding = {
-    padding: 5
+    setMessage(`welcome ${user}`)
+    setTimeout(() => {
+      setMessage(null)
+    }, 10000)
   }
 
   const match = useRouteMatch('/notes/:id')
@@ -115,16 +164,13 @@ const App = () => {
     : null
 
   return (
-    <div>
-      <div>
-        <Link style={padding} to="/">home</Link>
-        <Link style={padding} to="/notes">notes</Link>
-        <Link style={padding} to="/users">users</Link>
-        {user
-          ? <em>{user} logged in</em>
-          : <Link style={padding} to="/login">login</Link>
-        }
-      </div>
+    <div className="container">
+      {(message &&
+        <Alert variant="success">
+          {message}
+        </Alert>
+      )}
+      <NavigationBar user={user} />
 
       <Switch>
         <Route path="/notes/:id">
