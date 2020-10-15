@@ -4,7 +4,7 @@ import Blog from './Blog'
 
 const BlogList = () => {
   const blogs = useSelector(state => state.blogs)
-  const user = useSelector(state => state.user)
+  const user = useSelector(state => state.loggedUser)
 
   return (
     <div>

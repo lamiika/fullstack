@@ -1,16 +1,20 @@
 import React, { useEffect } from 'react'
 import BlogList from './components/BlogList'
 import BlogForm from './components/BlogForm'
+import UserList from './components/UserList'
 import LoginForm from './components/LoginForm'
+import NavigationBar from './components/NavigationBar'
 import Notification from './components/Notification'
 import Togglable from './components/Togglable'
 import blogService from './services/blogs'
 import { initializeBlogs } from './reducers/blogReducer'
+import { initializeUsers } from './reducers/userReducer'
 import { useDispatch, useSelector } from 'react-redux'
-import { setUser } from './reducers/userReducer'
+import { setUser } from './reducers/loggedUserReducer'
+import { Switch, Route } from 'react-router-dom'
 
 const App = () => {
-  const user = useSelector(state => state.user)
+  const user = useSelector(state => state.loggedUser)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -24,16 +28,8 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initializeBlogs())
+    dispatch(initializeUsers())
   }, [dispatch])
-
-  const handleLogout = (event) => {
-    event.preventDefault()
-
-    if (window.confirm('Are you sure you want to logout?')) {
-      window.localStorage.removeItem('loggedBloglistUser')
-      dispatch(setUser(null))
-    }
-  }
 
   return (
     <div>
@@ -45,13 +41,20 @@ const App = () => {
         </div> :
         <div>
           <h2>blogs</h2>
+          <NavigationBar />
           <Notification />
-          <p>{user.name} logged in <button onClick={handleLogout}>logout</button></p>
-          <Togglable buttonLabel='create new blog'>
-            <h2>create new</h2>
-            <BlogForm />
-          </Togglable>
-          <BlogList />
+          <Switch>
+            <Route path="/users">
+              <UserList />
+            </Route>
+            <Route path="/">
+              <Togglable buttonLabel='create new blog'>
+                <h2>create new</h2>
+                <BlogForm />
+              </Togglable>
+              <BlogList />
+            </Route>
+          </Switch>
         </div>
       }
     </div>
