@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { createBlog } from '../reducers/blogReducer'
 import { showNotification } from '../reducers/notificationReducer'
 
-const BlogForm = () => {
+const BlogForm = ({ toggleVisibility }) => {
   const [newBlog, setNewBlog] = useState({ title: '', author: '', url: '' })
   const dispatch = useDispatch()
 
@@ -18,6 +18,7 @@ const BlogForm = () => {
       setNewBlog({ title: '', author: '', url: '' })
       const message = `A new blog added! ${newBlog.title} by ${newBlog.author}`
       dispatch(showNotification(message, 'green', 3))
+      toggleVisibility()
     } else {
       const message = 'Creating a blog failed, title and url are required.'
       dispatch(showNotification(message, 'red', 5))
