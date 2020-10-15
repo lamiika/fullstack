@@ -1,21 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { likeBlog, removeBlog } from '../reducers/blogReducer'
 import { showNotification } from '../reducers/notificationReducer'
 import { useRouteMatch, useHistory } from 'react-router-dom'
+import CommentSection from './CommentSection'
+import blogService from '../services/blogs'
 
 const BlogView = () => {
   const dispatch = useDispatch()
   const history = useHistory()
-  const user = useSelector(state => state.loggedUser)
-  const blogs = useSelector(state => state.blogs)
-  const match = useRouteMatch('/blogs/:id')
-  const blog = match
-    ? blogs.find(blog => blog.id === match.params.id)
-    : null
   const [likes, setLikes] = useState(0)
-
-  const showLogoutButton = { display: '' }
+  const user = useSelector(state => state.loggedUser)
+  const match = useRouteMatch('/blogs/:id')
+  const [blog, setBlog] = useState(null)
+  
+  useEffect(() => {
+    const getBlog = async () => {
+      const response = await blogService.getComments(match.params.id)
+      setBlog(response)
+    }
+    getBlog()
+  }, [match.params.id])
 
   if (!blog || !user) {
     return null
@@ -67,6 +72,7 @@ const BlogView = () => {
         <button onClick={remove} style={showRemovalButton}>
           remove
         </button>
+        <CommentSection blog={blog} />
       </div>
     </div>
   )
