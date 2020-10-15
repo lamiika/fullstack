@@ -42,8 +42,8 @@ const App = () => {
           <LoginForm />
         </div> :
         <div>
-          <h2>blogs</h2>
           <NavigationBar />
+          <h2>blog app</h2>
           <Notification />
           <Switch>
             <Route path="/blogs/:id">
@@ -56,7 +56,7 @@ const App = () => {
               <UserList />
             </Route>
             <Route path="/">
-              <Togglable buttonLabel='create new blog'>
+              <Togglable buttonLabel='create new'>
                 <h2>create new</h2>
                 <BlogForm />
               </Togglable>

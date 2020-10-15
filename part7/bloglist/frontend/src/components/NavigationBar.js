@@ -9,6 +9,11 @@ const NavigationBar = () => {
   const padding = {
     padding: 5
   }
+  const barStyle = {
+    marginBottom: 20,
+    padding: 5,
+    backgroundColor: '#dddddd'
+  }
 
   const handleLogout = (event) => {
     event.preventDefault()
@@ -20,7 +25,7 @@ const NavigationBar = () => {
   }
 
   return (
-    <div>
+    <div style={barStyle}>
       <Link style={padding} to="/">blogs</Link>
       <Link style={padding} to="/users">users</Link>
       <span style={padding}>
