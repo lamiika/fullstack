@@ -1,8 +1,17 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 const UserList = () => {
   const users = useSelector(state => state.users)
+  const history = useHistory()
+  const clickableStyle = {
+    cursor: 'pointer',
+    userSelect: 'none',
+    WebkitUserSelect: 'none',
+    MozUserSelect: 'none',
+    MsUserSelect: 'none'
+  }
 
   return (
     <div>
@@ -17,7 +26,10 @@ const UserList = () => {
           </tr>
           {users.map(user =>
             <tr key={user.id}>
-              <td>
+              <td
+                style={clickableStyle}
+                onClick={() => history.push(`/users/${user.id}`)}
+              >
                 {user.name}
               </td>
               <td>

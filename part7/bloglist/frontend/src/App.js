@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import BlogList from './components/BlogList'
 import BlogForm from './components/BlogForm'
 import UserList from './components/UserList'
+import User from './components/User'
 import LoginForm from './components/LoginForm'
 import NavigationBar from './components/NavigationBar'
 import Notification from './components/Notification'
@@ -14,7 +15,7 @@ import { setUser } from './reducers/loggedUserReducer'
 import { Switch, Route } from 'react-router-dom'
 
 const App = () => {
-  const user = useSelector(state => state.loggedUser)
+  const loggedUser = useSelector(state => state.loggedUser)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -33,7 +34,7 @@ const App = () => {
 
   return (
     <div>
-      {user === null ?
+      {loggedUser === null ?
         <div>
           <h2>log in to application</h2>
           <Notification />
@@ -44,6 +45,9 @@ const App = () => {
           <NavigationBar />
           <Notification />
           <Switch>
+            <Route path="/users/:id">
+              <User />
+            </Route>
             <Route path="/users">
               <UserList />
             </Route>
