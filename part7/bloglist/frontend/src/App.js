@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import BlogList from './components/BlogList'
 import BlogForm from './components/BlogForm'
+import BlogView from './components/BlogView'
 import UserList from './components/UserList'
 import User from './components/User'
 import LoginForm from './components/LoginForm'
@@ -45,6 +46,9 @@ const App = () => {
           <NavigationBar />
           <Notification />
           <Switch>
+            <Route path="/blogs/:id">
+              <BlogView />
+            </Route>
             <Route path="/users/:id">
               <User />
             </Route>

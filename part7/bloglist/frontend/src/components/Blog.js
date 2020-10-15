@@ -3,9 +3,11 @@ import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { likeBlog, removeBlog } from '../reducers/blogReducer'
 import { showNotification } from '../reducers/notificationReducer'
+import { useHistory } from 'react-router-dom'
 
 const Blog = ({ blog, user }) => {
   const dispatch = useDispatch()
+  const history = useHistory()
   const [visible, setVisible] = useState(false)
   const [toggleButtonText, setToggleButtonText] = useState('view')
   const [likes, setLikes] = useState(blog.likes)
@@ -23,9 +25,12 @@ const Blog = ({ blog, user }) => {
     MozUserSelect: 'none',
     MsUserSelect: 'none'
   }
+  const margin = {
+    marginLeft: 10
+  }
 
   const showWhenVisible = { display: visible ? '' : 'none' }
-  const showLogoutButton = { display: user.username === blog.user.username ? '' : 'none' }
+  const showRemovalButton = { display: user.username === blog.user.username ? '' : 'none' }
 
   const toggleVisibility = () => {
     visible ? setToggleButtonText('view') : setToggleButtonText('hide')
@@ -58,9 +63,11 @@ const Blog = ({ blog, user }) => {
 
   return (
     <div style={blogStyle}>
-      <div onClick={toggleVisibility} style={clickableStyle} className="blogVisibleDiv">
-        {blog.title} {blog.author} {' '}
-        <button onClick={toggleVisibility} className="blogToggleButton">
+      <div className="blogVisibleDiv">
+        <span onClick={() => history.push(`/blogs/${blog.id}`)} style={clickableStyle}>
+          {blog.title} {blog.author}
+        </span>
+        <button onClick={toggleVisibility} style={margin} className="blogToggleButton">
           {toggleButtonText}
         </button>
       </div>
@@ -75,7 +82,7 @@ const Blog = ({ blog, user }) => {
         <div>
           {blog.user.name}
         </div>
-        <button onClick={remove} style={showLogoutButton}>
+        <button onClick={remove} style={showRemovalButton}>
           remove
         </button>
       </div>
