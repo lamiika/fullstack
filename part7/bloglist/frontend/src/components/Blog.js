@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
+import { likeBlog, removeBlog } from '../reducers/blogReducer'
+import { showNotification } from '../reducers/notificationReducer'
 
-const Blog = ({ blog, updateBlog, removeBlog, user }) => {
+const Blog = ({ blog, user }) => {
+  const dispatch = useDispatch()
   const [visible, setVisible] = useState(false)
   const [toggleButtonText, setToggleButtonText] = useState('view')
   const [likes, setLikes] = useState(blog.likes)
@@ -31,13 +35,25 @@ const Blog = ({ blog, updateBlog, removeBlog, user }) => {
   const addLike = async (event) => {
     event.preventDefault()
     const newBlog = { ...blog, likes: likes + 1 }
-    const updatedBlog = await updateBlog(newBlog)
-    setLikes(updatedBlog.likes)
+    const updatedBlog = await dispatch(likeBlog(newBlog))
+    if (updatedBlog) {
+      setLikes(updatedBlog.likes)
+      const message = `You liked ${blog.title} by ${blog.author}`
+      dispatch(showNotification(message, 'green', 1))
+    } else {
+      console.log('fail')
+    }
   }
 
-  const remove = (event) => {
+  const remove = async (event) => {
     event.preventDefault()
-    removeBlog(blog)
+    if (window.confirm(`Remove blog ${blog.name} by ${blog.author}`)) {
+      const success = await dispatch(removeBlog(blog))
+      if (success) {
+        const message = `Blog ${blog.title} by ${blog.author} successfully removed`
+        dispatch(showNotification(message, 'green', 3))
+      }
+    }
   }
 
   return (
@@ -69,8 +85,6 @@ const Blog = ({ blog, updateBlog, removeBlog, user }) => {
 
 Blog.propTypes = {
   blog: PropTypes.object.isRequired,
-  updateBlog: PropTypes.func.isRequired,
-  removeBlog: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired
 }
 

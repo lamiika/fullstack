@@ -6,6 +6,12 @@ const blogReducer = (state = [], action) => {
       return action.data.sort((a, b) => b.likes - a.likes)
     case 'CREATE_BLOG':
       return [...state, action.data]
+    case 'UPDATE_BLOG':
+      const updatedBlogs = state.map(blog =>
+        blog.id !== action.data.id ? blog : action.data)
+      return updatedBlogs.sort((a, b) => b.likes - a.likes)
+    case 'REMOVE_BLOG':
+      return state.filter(blog => blog.id !== action.data.id)
     default:
       return state
   }
@@ -32,6 +38,37 @@ export const createBlog = (blog) => {
       return true
     } catch (exception) {
       console.log(exception)
+      return false
+    }
+  }
+}
+
+export const likeBlog = (blog) => {
+  return async dispatch => {
+    try {
+      const likedBlog = await blogService.update(blog)
+      dispatch({
+        type: 'UPDATE_BLOG',
+        data: likedBlog
+      })
+      return likedBlog
+    } catch (exception) {
+      console.log(exception)
+      return false
+    }
+  }
+}
+
+export const removeBlog = (blog) => {
+  return async dispatch => {
+    try {
+      await blogService.remove(blog)
+      dispatch({
+        type: 'REMOVE_BLOG',
+        data: blog
+      })
+      return true
+    } catch (exception) {
       return false
     }
   }

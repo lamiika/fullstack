@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import Blog from './Blog'
 
-const BlogList = ({ updateBlog, removeBlog, user }) => {
+const BlogList = ({ user }) => {
   const blogs = useSelector(state => state.blogs)
 
   return (
@@ -10,8 +10,6 @@ const BlogList = ({ updateBlog, removeBlog, user }) => {
       {blogs.map(blog =>
         <Blog key={blog.id}
           blog={blog}
-          updateBlog={updateBlog}
-          removeBlog={removeBlog}
           user={user}
         />
       )}

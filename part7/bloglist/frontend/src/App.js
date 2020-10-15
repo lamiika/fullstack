@@ -30,32 +30,6 @@ const App = () => {
     dispatch(initializeBlogs())
   }, [dispatch])
 
-  const updateBlog = async (newBlog) => {
-    const index = blogs.findIndex(blog => blog.id === newBlog.id)
-    try {
-      const updatedBlog = await blogService.update(newBlog)
-      const newBlogs = [ ...blogs.slice(0, index), updatedBlog, ...blogs.slice(index + 1) ]
-      setBlogs(newBlogs)
-      return updatedBlog
-    } catch (exception) {
-      console.log(exception)
-    }
-  }
-
-  const removeBlog = async (blog) => {
-    if (window.confirm(`Remove blog ${blog.name} by ${blog.author}`)) {
-      try {
-        await blogService.remove(blog)
-        const newBlogs = blogs.filter(b => b.id !== blog.id)
-        setBlogs(newBlogs)
-        const message = `Blog ${blog.title} by ${blog.author} successfully removed`
-        dispatch(showNotification(message, 'green', 3))
-      } catch (exception) {
-        console.log(exception)
-      }
-    }
-  }
-
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
@@ -108,8 +82,6 @@ const App = () => {
             <BlogForm />
           </Togglable>
           <BlogList
-            updateBlog={updateBlog}
-            removeBlog={removeBlog}
             user={user}
           />
         </div>
