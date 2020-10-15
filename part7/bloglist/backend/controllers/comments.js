@@ -11,6 +11,7 @@ commentsRouter.get('/', async (request, response) => {
 
 commentsRouter.post('/', async (request, response) => {
   const body = request.body
+  console.log(body.content, body.blog)
 
   const blog = await Blog.findById(body.blog)
 

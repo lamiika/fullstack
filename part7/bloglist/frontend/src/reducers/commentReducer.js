@@ -37,7 +37,7 @@ export const createComment = (comment) => {
         type: 'ADD_COMMENT',
         data: newComment
       })
-      return true
+      return newComment
     } catch (exception) {
       console.log(exception)
       return false
