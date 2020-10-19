@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { createComment } from '../reducers/commentReducer'
+import { createComment } from '../reducers/blogReducer'
 import { useDispatch } from 'react-redux'
 
-const CommentForm = ({ blog }) => {
+const CommentForm = ({ blog, setBlog }) => {
   const dispatch = useDispatch()
   const [content, setContent] = useState('')
   const addComment = async (event) => {
@@ -10,9 +10,10 @@ const CommentForm = ({ blog }) => {
     const commentObject = {
       content, blog: blog.id
     }
-    const newComment = await dispatch(createComment(commentObject))
-    
-    if (newComment) {
+    const updatedBlog = await dispatch(createComment(commentObject))
+
+    if (updatedBlog) {
+      setBlog(updatedBlog)
       setContent('')
     }
   }
@@ -21,6 +22,7 @@ const CommentForm = ({ blog }) => {
       <input
         id='title'
         type='text'
+        value={content}
         onChange={(event) => setContent(event.target.value)}
       />
       <button type="submit">

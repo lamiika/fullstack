@@ -1,26 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { likeBlog, removeBlog } from '../reducers/blogReducer'
+import { likeBlog, removeBlog, initializeBlogComments } from '../reducers/blogReducer'
 import { showNotification } from '../reducers/notificationReducer'
 import { useRouteMatch, useHistory } from 'react-router-dom'
 import CommentSection from './CommentSection'
-import blogService from '../services/blogs'
 
 const BlogView = () => {
   const dispatch = useDispatch()
   const history = useHistory()
+  const match = useRouteMatch('/blogs/:id')
+  const [blog, setBlog] = useState()
   const [likes, setLikes] = useState(0)
   const user = useSelector(state => state.loggedUser)
-  const match = useRouteMatch('/blogs/:id')
-  const [blog, setBlog] = useState(null)
-  
+
   useEffect(() => {
-    const getBlog = async () => {
-      const response = await blogService.getComments(match.params.id)
+    const getBlogComments = async () => {
+      const response = await dispatch(initializeBlogComments(match.params.id))
       setBlog(response)
     }
-    getBlog()
-  }, [match.params.id])
+    getBlogComments()
+  }, [dispatch, match.params.id])
 
   if (!blog || !user) {
     return null
@@ -30,7 +29,7 @@ const BlogView = () => {
 
   const addLike = async (event) => {
     event.preventDefault()
-    const newBlog = { ...blog, likes: blog.likes + 1 }
+    const newBlog = { ...blog, likes: likes ? likes + 1 : blog.likes + 1 }
     const updatedBlog = await dispatch(likeBlog(newBlog))
     if (updatedBlog) {
       setLikes(updatedBlog.likes)
@@ -72,7 +71,7 @@ const BlogView = () => {
         <button onClick={remove} style={showRemovalButton}>
           remove
         </button>
-        <CommentSection blog={blog} />
+        <CommentSection blog={blog} setBlog={setBlog} />
       </div>
     </div>
   )
