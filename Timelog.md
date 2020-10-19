@@ -1,6 +1,6 @@
 ## Timelog of the working hours 2020
 
-### Entire time used: **123:48** hours
+### Entire time used: **125:52** hours
 
 Last updated on 16.10.2020
 
@@ -84,7 +84,7 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 12.10. | 02:05h | 10:57   | 13:14   | 00:12h | Part 6 c
 12.10. | 01:25h | 13:49   | 15:21   | 00:07h | Part 6 d
 
-### Part 7 (21:41h)
+### Part 7 (23:45h)
 
 Day    | Time   | Begin   | End     | Breaks | I worked on
 :-----:|:------:|:-------:|:-------:|:------:|:------
@@ -98,7 +98,7 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 14.10. | 02:09h | 23:22   | 01:31   | 00:00h | Part 7 f 
 15.10. | 08:05h | 12:56   | 22:43   | 01:42h | Part 7 f
 16.10. | 01:26h | 11:15   | 12:46   | 00:05h | MongoDB docs, GridFS
-19.10. | 00:00h | 17:45   | 19:53   | 00:04h | Part 7 f
+19.10. | 02:04h | 17:45   | 19:53   | 00:04h | Part 7 f
 
 <!--
 .10. | 00:00h | :   | 00:00   | 00:00h | Part 
