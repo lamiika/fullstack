@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 import { createComment } from '../reducers/blogReducer'
 import { useDispatch } from 'react-redux'
+import {
+  TextField,
+  Button
+} from '@material-ui/core'
 
 const CommentForm = ({ blog, setBlog }) => {
   const dispatch = useDispatch()
@@ -19,15 +23,16 @@ const CommentForm = ({ blog, setBlog }) => {
   }
   return (
     <form onSubmit={addComment}>
-      <input
+      <TextField label="write a comment"
+        variant="outlined"
         id='title'
         type='text'
         value={content}
         onChange={(event) => setContent(event.target.value)}
       />
-      <button type="submit">
+      <Button variant="contained" color="primary" type="submit">
         add comment
-      </button>
+      </Button>
     </form>
   )
 }

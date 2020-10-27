@@ -14,6 +14,7 @@ import { initializeUsers } from './reducers/userReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUser } from './reducers/loggedUserReducer'
 import { Switch, Route } from 'react-router-dom'
+import { Typography } from '@material-ui/core'
 
 const App = () => {
   const loggedUser = useSelector(state => state.loggedUser)
@@ -37,13 +38,12 @@ const App = () => {
     <div>
       {loggedUser === null ?
         <div>
-          <h2>log in to application</h2>
+          <Typography variant="h6">Log in to application</Typography>
           <Notification />
           <LoginForm />
         </div> :
         <div>
           <NavigationBar />
-          <h2>blog app</h2>
           <Notification />
           <Switch>
             <Route path="/blogs/:id">
@@ -57,7 +57,7 @@ const App = () => {
             </Route>
             <Route path="/">
               <Togglable buttonLabel='create new'>
-                <h2>create new</h2>
+                <Typography variant="h6">Create new blog</Typography>
                 <BlogForm />
               </Togglable>
               <BlogList />

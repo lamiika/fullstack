@@ -4,6 +4,14 @@ import { likeBlog, removeBlog, initializeBlogComments } from '../reducers/blogRe
 import { showNotification } from '../reducers/notificationReducer'
 import { useRouteMatch, useHistory } from 'react-router-dom'
 import CommentSection from './CommentSection'
+import {
+  Card,
+  Typography,
+  Button,
+  IconButton,
+  Tooltip
+} from '@material-ui/core'
+import { ThumbUp, Delete } from '@material-ui/icons'
 
 const BlogView = () => {
   const dispatch = useDispatch()
@@ -55,24 +63,32 @@ const BlogView = () => {
   return (
     <div>
       <div>
-        <h2>{blog.title} {blog.author}</h2>
+        <Typography variant="h6">
+          {blog.title} {blog.author}
+        </Typography>
       </div>
-      <div>
+      <Card>
         <div>
           <a href={blog.url}>{blog.url}</a>
         </div>
         <div>
           likes {' '} {likes ? likes : blog.likes} {' '}
-          <button onClick={addLike} className="likeButton">like</button>
+          <Tooltip title="Like" enterDelay={400} placement="right">
+            <IconButton onClick={addLike} size="small" className="likeButton">
+              <ThumbUp color="primary" />
+            </IconButton>
+          </Tooltip>
         </div>
         <div>
           {blog.user.name}
         </div>
-        <button onClick={remove} style={showRemovalButton}>
-          remove
-        </button>
+        <Tooltip title="Delete blog" enterDelay={400} placement="bottom-start">
+          <IconButton color="secondary" size="small" onClick={remove} style={showRemovalButton}>
+            <Delete />
+          </IconButton>
+        </Tooltip>
         <CommentSection blog={blog} setBlog={setBlog} />
-      </div>
+      </Card>
     </div>
   )
 }

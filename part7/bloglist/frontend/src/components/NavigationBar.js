@@ -2,17 +2,18 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setUser } from '../reducers/loggedUserReducer'
 import { Link } from 'react-router-dom'
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  Typography
+} from '@material-ui/core'
 
 const NavigationBar = () => {
   const user = useSelector(state => state.loggedUser)
   const dispatch = useDispatch()
   const padding = {
     padding: 5
-  }
-  const barStyle = {
-    marginBottom: 20,
-    padding: 5,
-    backgroundColor: '#dddddd'
   }
 
   const handleLogout = (event) => {
@@ -25,16 +26,25 @@ const NavigationBar = () => {
   }
 
   return (
-    <div style={barStyle}>
-      <Link style={padding} to="/">blogs</Link>
-      <Link style={padding} to="/users">users</Link>
-      <span style={padding}>
-        {user.name} logged in
-      </span>
-      <button onClick={handleLogout}>
-        logout
-      </button>
-    </div>
+    <AppBar position="static" style={{ marginBottom: '14px' }}>
+      <Toolbar>
+        <Typography variant="h6" style={padding}>
+          Blog app
+        </Typography>
+        <Button color="inherit" component={Link} to="/">
+          blogs
+        </Button>
+        <Button color="inherit" component={Link} to="/users">
+          users
+        </Button>
+        <Typography variant="caption" style={padding}>
+          {user.name} logged in
+        </Typography>
+        <Button variant="contained" color="primary" onClick={handleLogout}>
+          logout
+        </Button>
+      </Toolbar>
+    </AppBar>
   )
 }
 

@@ -4,20 +4,25 @@ import { useDispatch } from 'react-redux'
 import { likeBlog, removeBlog } from '../reducers/blogReducer'
 import { showNotification } from '../reducers/notificationReducer'
 import { useHistory } from 'react-router-dom'
+import {
+  Collapse,
+  TableRow,
+  TableCell,
+  IconButton,
+  Tooltip
+} from '@material-ui/core'
+import {
+  KeyboardArrowDown,
+  KeyboardArrowUp,
+  ThumbUp,
+  Delete
+} from '@material-ui/icons'
 
 const Blog = ({ blog, user }) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const [visible, setVisible] = useState(false)
-  const [toggleButtonText, setToggleButtonText] = useState('view')
   const [likes, setLikes] = useState(blog.likes)
-  const blogStyle = {
-    paddingTop: 10,
-    paddingLeft: 2,
-    border: 'solid',
-    borderWidth: 1,
-    marginBottom: 5
-  }
   const clickableStyle = {
     cursor: 'pointer',
     userSelect: 'none',
@@ -25,15 +30,10 @@ const Blog = ({ blog, user }) => {
     MozUserSelect: 'none',
     MsUserSelect: 'none'
   }
-  const margin = {
-    marginLeft: 10
-  }
 
-  const showWhenVisible = { display: visible ? '' : 'none' }
   const showRemovalButton = { display: user.username === blog.user.username ? '' : 'none' }
 
   const toggleVisibility = () => {
-    visible ? setToggleButtonText('view') : setToggleButtonText('hide')
     setVisible(!visible)
   }
 
@@ -62,31 +62,47 @@ const Blog = ({ blog, user }) => {
   }
 
   return (
-    <div style={blogStyle}>
-      <div className="blogVisibleDiv">
-        <span onClick={() => history.push(`/blogs/${blog.id}`)} style={clickableStyle}>
-          {blog.title} {blog.author}
-        </span>
-        <button onClick={toggleVisibility} style={margin} className="blogToggleButton">
-          {toggleButtonText}
-        </button>
-      </div>
-      <div style={showWhenVisible} className="togglableInfoDiv">
-        <div>
-          {blog.url}
-        </div>
-        <div>
-          likes {' '} {likes} {' '}
-          <button onClick={addLike} className="likeButton">like</button>
-        </div>
-        <div>
-          {blog.user.name}
-        </div>
-        <button onClick={remove} style={showRemovalButton}>
-          remove
-        </button>
-      </div>
-    </div>
+    <>
+      <TableRow className="blogVisibleDiv">
+        <TableCell>
+          <span onClick={() => history.push(`/blogs/${blog.id}`)} style={clickableStyle}>
+            {blog.title} {blog.author}
+          </span>
+        </TableCell>
+        <TableCell>
+          <IconButton size="small" onClick={toggleVisibility} className="blogToggleButton">
+            {visible ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+          </IconButton>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }}>
+          <Collapse in={visible} className="togglableInfoDiv" timeout="auto" unmountOnExit>
+            <div style={{ padding: "20px" }}>
+              <div>
+                {blog.url}
+              </div>
+              <div>
+                likes {' '} {likes} {' '}
+                <Tooltip title="Like" enterDelay={400} placement="right">
+                  <IconButton onClick={addLike} size="small" className="likeButton">
+                    <ThumbUp color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </div>
+              <div>
+                {blog.user.name}
+              </div>
+              <Tooltip title="Delete blog" enterDelay={400} placement="bottom-start">
+                <IconButton color="secondary" size="small" onClick={remove} style={showRemovalButton}>
+                  <Delete />
+                </IconButton>
+              </Tooltip>
+            </div>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </>
   )
 }
 

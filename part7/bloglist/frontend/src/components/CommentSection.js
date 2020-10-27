@@ -1,18 +1,29 @@
 import React from 'react'
 import CommentForm from './CommentForm'
+import {
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  Typography
+} from '@material-ui/core'
+import { Person } from '@material-ui/icons'
 
 const CommentSection = ({ blog, setBlog }) => {
   return (
     <div>
-      <h3>comments</h3>
+      <Typography>Comments</Typography>
       <CommentForm blog={blog} setBlog={setBlog} />
-      <ul>
+      <List>
         {blog.comments.map(comment =>
-          <li key={comment.id}>
-            {comment.content}
-          </li>
+          <ListItem key={comment.id}>
+            <ListItemIcon>
+              <Person color="primary" />
+            </ListItemIcon>
+            <ListItemText primary={comment.content} />
+          </ListItem>
         )}
-      </ul>
+      </List>
     </div>
   )
 }

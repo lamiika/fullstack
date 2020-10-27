@@ -2,6 +2,10 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { createBlog } from '../reducers/blogReducer'
 import { showNotification } from '../reducers/notificationReducer'
+import {
+  Button,
+  TextField
+} from '@material-ui/core'
 
 const BlogForm = ({ toggleVisibility }) => {
   const [newBlog, setNewBlog] = useState({ title: '', author: '', url: '' })
@@ -28,8 +32,7 @@ const BlogForm = ({ toggleVisibility }) => {
   return (
     <form onSubmit={addBlog}>
       <div>
-        title:
-        <input
+        <TextField label="title"
           id="title"
           type="text"
           value={newBlog.title}
@@ -38,8 +41,7 @@ const BlogForm = ({ toggleVisibility }) => {
         />
       </div>
       <div>
-        author:
-        <input
+        <TextField label="author"
           id="author"
           type="text"
           value={newBlog.author}
@@ -48,8 +50,7 @@ const BlogForm = ({ toggleVisibility }) => {
         />
       </div>
       <div>
-        url:
-        <input
+        <TextField label="url"
           id="url"
           type="text"
           value={newBlog.url}
@@ -57,9 +58,9 @@ const BlogForm = ({ toggleVisibility }) => {
           onChange={event => handleChange(event, 'url')}
         />
       </div>
-      <button type="submit" data-cy="blogSubmit">
+      <Button variant="contained" color="primary" type="submit" data-cy="blogSubmit">
         create
-      </button>
+      </Button>
     </form>
   )
 }
