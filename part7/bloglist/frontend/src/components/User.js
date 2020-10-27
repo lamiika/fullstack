@@ -1,8 +1,19 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { useRouteMatch } from 'react-router-dom'
+import { useRouteMatch, useHistory } from 'react-router-dom'
+import {
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  IconButton,
+  Tooltip,
+  Typography
+} from '@material-ui/core'
+import { ImportContacts } from '@material-ui/icons'
 
 const User = () => {
+  const history = useHistory()
   const users = useSelector(state => state.users)
   const match = useRouteMatch('/users/:id')
   const user = match
@@ -15,13 +26,24 @@ const User = () => {
 
   return (
     <div>
-      <h2>{user.name}</h2>
-      <h4>added blogs</h4>
-      <ul>
+      <Typography variant="h6" style={{ marginBottom: '20px' }}>{user.name}</Typography>
+      <Typography variant="subtitle1">Added blogs:</Typography>
+      <List>
         {user.blogs.map(blog =>
-          <li key={blog.id}>{blog.title}</li>
+          <ListItem key={blog.id}>
+            <ListItemIcon>
+              <Tooltip title="Open blog" enterDelay={600}>
+                <IconButton onClick={() => history.push(`/blogs/${blog.id}`)}>
+                  <ImportContacts />
+                </IconButton>
+              </Tooltip>
+            </ListItemIcon>
+            <ListItemText>
+              {blog.title}
+            </ListItemText>
+          </ListItem>
         )}
-      </ul>
+      </List>
     </div>
   )
 }

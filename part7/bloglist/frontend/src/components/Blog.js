@@ -91,7 +91,9 @@ const Blog = ({ blog, user }) => {
                 </Tooltip>
               </div>
               <div>
-                {blog.user.name}
+                <span style={clickableStyle} onClick={() => history.push(`/users/${blog.user.id}`)}>
+                  {blog.user.name}
+                </span>
               </div>
               <Tooltip title="Delete blog" enterDelay={400} placement="bottom-start">
                 <IconButton color="secondary" size="small" onClick={remove} style={showRemovalButton}>

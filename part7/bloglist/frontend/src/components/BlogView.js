@@ -20,6 +20,13 @@ const BlogView = () => {
   const [blog, setBlog] = useState()
   const [likes, setLikes] = useState(0)
   const user = useSelector(state => state.loggedUser)
+  const clickableStyle = {
+    cursor: 'pointer',
+    userSelect: 'none',
+    WebkitUserSelect: 'none',
+    MozUserSelect: 'none',
+    MsUserSelect: 'none'
+  }
 
   useEffect(() => {
     const getBlogComments = async () => {
@@ -80,7 +87,9 @@ const BlogView = () => {
           </Tooltip>
         </div>
         <div>
-          {blog.user.name}
+          <span style={clickableStyle} onClick={() => history.push(`/users/${blog.user.id}`)}>
+            {blog.user.name}
+          </span>
         </div>
         <Tooltip title="Delete blog" enterDelay={400} placement="bottom-start">
           <IconButton color="secondary" size="small" onClick={remove} style={showRemovalButton}>
