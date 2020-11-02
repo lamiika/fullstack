@@ -1,20 +1,29 @@
 import React, { useState } from 'react'
+import Select from 'react-select'
 import { useMutation } from '@apollo/client'
 
 import { EDIT_AUTHOR } from '../queries'
 
-const BirthForm = () => {
-  const [name, setName] = useState('')
+const BirthForm = ({ authors }) => {
+  const [selectedOption, setSelectedOption] = useState(null)
   const [born, setBorn] = useState('')
 
   const [changeBirthYear, result] = useMutation(EDIT_AUTHOR)
 
+  const names = authors.map(a => a.name)
+  const options = names.reduce((accumulator, currentValue) => {
+    return [ ...accumulator, { value: currentValue, label: currentValue } ]
+  }, [])
+
   const submit = (event) => {
     event.preventDefault()
 
-    changeBirthYear({ variables: { name, born: Number(born) } })
+    changeBirthYear({ variables: {
+      name: selectedOption.value,
+      born: Number(born)
+    }})
 
-    setName('')
+    setSelectedOption(null)
     setBorn('')
   }
 
@@ -24,9 +33,10 @@ const BirthForm = () => {
       <form onSubmit={submit}>
         <div>
           name
-          <input
-            value={name}
-            onChange={({ target }) => setName(target.value)}
+          <Select
+            value={selectedOption}
+            onChange={setSelectedOption}
+            options={options}
           />
         </div>
         <div>
