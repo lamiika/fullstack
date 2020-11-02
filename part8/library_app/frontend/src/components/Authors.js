@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import BirthForm from './BirthForm'
 import { useQuery } from '@apollo/client'
 import { ALL_AUTHORS } from '../queries'
 
@@ -37,6 +38,8 @@ const Authors = (props) => {
           )}
         </tbody>
       </table>
+
+      <BirthForm />
 
     </div>
   )
