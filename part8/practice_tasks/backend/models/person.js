@@ -16,7 +16,7 @@ const schema = new mongoose.Schema({
     required: true,
     minlength: 5
   },
-  cite: {
+  city: {
     type: String,
     required: true,
     minlength: 3

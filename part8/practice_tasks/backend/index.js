@@ -1,14 +1,11 @@
-const { ApolloServer, UserInputError, gql } = require('apollo-server')
+const { ApolloServer, UserInputError, AuthenticationError, gql } = require('apollo-server')
 const mongoose = require('mongoose')
 const Person = require('./models/person')
 const User = require('./models/user')
 
+const { MONGODB_URI } = require('./utils/config')
 const jwt = require('jsonwebtoken')
 const JWT_SECRET = 'NEED_HERE_A_SECRET_KEY'
-
-const MONGODB_URI = 'mongodb+srv://fullstack:halfstack@cluster0-ostce.mongodb.net/graphql?retryWrites=true'
-
-console.log('connecting to', MONGODB_URI)
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
   .then(() => {
