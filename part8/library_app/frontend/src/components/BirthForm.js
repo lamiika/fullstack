@@ -8,7 +8,7 @@ const BirthForm = ({ authors }) => {
   const [selectedOption, setSelectedOption] = useState(null)
   const [born, setBorn] = useState('')
 
-  const [changeBirthYear, result] = useMutation(EDIT_AUTHOR)
+  const [changeBirthYear] = useMutation(EDIT_AUTHOR)
 
   const names = authors.map(a => a.name)
   const options = names.reduce((accumulator, currentValue) => {

@@ -1,36 +1,46 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useApolloClient } from '@apollo/client'
 import Authors from './components/Authors'
 import Books from './components/Books'
 import NewBook from './components/NewBook'
+import RecommendedBooks from './components/RecommendedBooks'
 import LoginForm from './components/LoginForm'
 
 const App = () => {
   const [page, setPage] = useState('authors')
-  const [token, setToken] = useState(null)
+  const [user, setUser] = useState(null)
   const client = useApolloClient()
 
   const logout = () => {
-    setToken(null)
+    setUser(null)
     localStorage.clear()
     client.resetStore()
-    if (page === 'add') {
-      setPage('authors')
+    if (page === 'add' || page === 'recommend') {
+      setPage('login')
     }
   }
+
+  useEffect(() => {
+    const loggedUserJSON = localStorage.getItem('library-user-token')
+    if (loggedUserJSON) {
+      const loggedUser = JSON.parse(loggedUserJSON)
+      setUser(loggedUser)
+    }
+  }, [])
 
   return (
     <div>
       <div>
         <button onClick={() => setPage('authors')}>authors</button>
         <button onClick={() => setPage('books')}>books</button>
-        {token
+        {user
           ? <>
               <button onClick={() => setPage('add')}>add book</button>
+              <button onClick={() => setPage('recommend')}>recommend</button>
               <button onClick={logout}>logout</button>
+              <span>{' '}logged in as {user.username}</span>
             </>
           : <>
-              <button onClick={() => setPage('login')}>add book</button>
               <button onClick={() => setPage('login')}>login</button>
             </>
         }
@@ -47,11 +57,16 @@ const App = () => {
       <NewBook
         show={page === 'add'}
       />
+      
+      <RecommendedBooks
+        show={page === 'recommend'}
+        user={user}
+      />
 
       <LoginForm
         show={page === 'login'}
         setPage={setPage}
-        setToken={setToken}
+        setUser={setUser}
       />
 
     </div>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import BirthForm from './BirthForm'
 import { useQuery } from '@apollo/client'
 import { ALL_AUTHORS } from '../queries'

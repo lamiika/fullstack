@@ -40,6 +40,8 @@ const typeDefs = gql`
 
   type Token {
     value: String!
+    username: String!
+    favoriteGenre: String!
   }
 
   type Query {
@@ -181,7 +183,9 @@ const resolvers = {
         id: user._id,
       }
 
-      return { value: jwt.sign(userForToken, JWT_SECRET) }
+      const token = jwt.sign(userForToken, JWT_SECRET)
+
+      return { value: token, username: user.username, favoriteGenre: user.favoriteGenre }
     }
   }
 }
@@ -191,7 +195,6 @@ const server = new ApolloServer({
   resolvers,
   context: async ({ req }) => {
     const auth = req ? req.headers.authorization : null
-    console.log('auth', auth)
     if (auth && auth.toLowerCase().startsWith('bearer ')) {
       const decodedToken = jwt.verify(
         auth.substring(7), JWT_SECRET
