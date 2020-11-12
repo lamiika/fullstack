@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BookTable = ({ books, genre }) => {
+const BookTable = ({ books }) => {
   return (
     <table>
       <tbody>
@@ -14,8 +14,6 @@ const BookTable = ({ books, genre }) => {
           </th>
         </tr>
         {books
-          .filter(book =>
-            book.genres.includes(genre) || genre === 'all')
           .map(book =>
           <tr key={book.title}>
             <td>{book.title}</td>
