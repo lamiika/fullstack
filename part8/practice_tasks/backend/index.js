@@ -72,7 +72,14 @@ const typeDefs = gql`
       name:String!
     ): User
   }
+
+  type Subscription {
+    personAdded: Person!
+  }
 `
+
+const { PubSub } = require('apollo-server')
+const pubsub = new PubSub()
 
 const resolvers = {
   Query: {
@@ -115,6 +122,8 @@ const resolvers = {
           invalidArgs: args,
         })
       }
+
+      pubsub.publish('PERSON_ADDED', { personAdded: person })
   
       return person
     },
@@ -172,6 +181,11 @@ const resolvers = {
       await currentUser.save()
 
       return currentUser
+    },
+  },
+  Subscription: {
+    personAdded: {
+      subscribe: () => pubsub.asyncIterator(['PERSON_ADDED'])
     }
   }
 }
@@ -192,6 +206,7 @@ const server = new ApolloServer({
   }
 })
 
-server.listen().then(({ url }) => {
+server.listen().then(({ url, subscriptionsUrl }) => {
   console.log(`Server ready at ${url}`)
+  console.log(`Subscriptions ready at ${subscriptionsUrl}`)
 })
