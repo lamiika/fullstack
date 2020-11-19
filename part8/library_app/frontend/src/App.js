@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { useApolloClient } from '@apollo/client'
+import {
+  useApolloClient, useSubscription, useMutation, useQuery
+} from '@apollo/client'
 import Authors from './components/Authors'
 import Books from './components/Books'
 import NewBook from './components/NewBook'
 import RecommendedBooks from './components/RecommendedBooks'
 import LoginForm from './components/LoginForm'
+import { BOOK_ADDED } from './queries'
 
 const App = () => {
   const [page, setPage] = useState('authors')
   const [user, setUser] = useState(null)
   const client = useApolloClient()
+  const [notification, setNotification] = useState(null)
 
   const logout = () => {
     setUser(null)
@@ -28,6 +32,17 @@ const App = () => {
     }
   }, [])
 
+  useSubscription(BOOK_ADDED, {
+    onSubscriptionData: ({ subscriptionData }) => {
+      const data = subscriptionData.data.bookAdded
+      setNotification(`New book added: '${data.title}' by ${data.author.name}`)
+      console.log(subscriptionData.data.bookAdded)
+      setTimeout(() => {
+        setNotification(null)
+      }, 3000)
+    }
+  })
+
   return (
     <div>
       <div>
@@ -44,6 +59,10 @@ const App = () => {
               <button onClick={() => setPage('login')}>login</button>
             </>
         }
+      </div>
+
+      <div>
+        {notification}
       </div>
 
       <Authors
