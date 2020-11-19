@@ -48,7 +48,6 @@ const App = () => {
     const authorDataInStore = client.readQuery({ query: ALL_AUTHORS })
 
     if (!includedIn(authorDataInStore.allAuthors, addedBook.author)) {
-      console.log('writing')
       client.writeQuery({
         query: ALL_AUTHORS,
         data: { allAuthors: authorDataInStore.allAuthors.concat(addedBook.author) }
