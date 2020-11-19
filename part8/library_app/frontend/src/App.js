@@ -7,7 +7,7 @@ import Books from './components/Books'
 import NewBook from './components/NewBook'
 import RecommendedBooks from './components/RecommendedBooks'
 import LoginForm from './components/LoginForm'
-import { BOOK_ADDED } from './queries'
+import { ALL_BOOKS, ALL_AUTHORS, BOOK_ADDED } from './queries'
 
 const App = () => {
   const [page, setPage] = useState('authors')
@@ -32,11 +32,35 @@ const App = () => {
     }
   }, [])
 
+  const updateCacheWith = (addedBook) => {
+    const includedIn = (set, object) =>
+      set.map(p => p.id).includes(object.id)
+      
+    const bookDataInStore = client.readQuery({ query: ALL_BOOKS })
+
+    if (!includedIn(bookDataInStore.allBooks, addedBook)) {
+      client.writeQuery({
+        query: ALL_BOOKS,
+        data: { allBooks : bookDataInStore.allBooks.concat(addedBook)}
+      })
+    }
+
+    const authorDataInStore = client.readQuery({ query: ALL_AUTHORS })
+
+    if (!includedIn(authorDataInStore.allAuthors, addedBook.author)) {
+      console.log('writing')
+      client.writeQuery({
+        query: ALL_AUTHORS,
+        data: { allAuthors: authorDataInStore.allAuthors.concat(addedBook.author) }
+      })
+    }
+  }
+
   useSubscription(BOOK_ADDED, {
     onSubscriptionData: ({ subscriptionData }) => {
-      const data = subscriptionData.data.bookAdded
-      setNotification(`New book added: '${data.title}' by ${data.author.name}`)
-      console.log(subscriptionData.data.bookAdded)
+      const addedBook = subscriptionData.data.bookAdded
+      setNotification(`New book added: '${addedBook.title}' by ${addedBook.author.name}`)
+      updateCacheWith(addedBook)
       setTimeout(() => {
         setNotification(null)
       }, 3000)
@@ -75,6 +99,7 @@ const App = () => {
 
       <NewBook
         show={page === 'add'}
+        updateCacheWith={updateCacheWith}
       />
       
       <RecommendedBooks

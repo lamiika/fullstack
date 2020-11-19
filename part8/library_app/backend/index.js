@@ -144,7 +144,7 @@ const resolvers = {
       }
 
       const populatedBook = await newBook
-        .populate('author', { name: 1 })
+        .populate('author', { name: 1, born: 1, bookCount: 1, id: 1 })
         .execPopulate()
 
       pubsub.publish('BOOK_ADDED', { bookAdded: populatedBook })
