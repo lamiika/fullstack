@@ -118,8 +118,14 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 17.11. | 00:49h | 10:18   | 11:10   | 00:03h | Part 8 e
 19.11. | 01:44h | 11:11   | 13:03   | 00:08h | Part 8 e
 
+### Part 9 (00:00h)
+
+Day    | Time   | Begin   | End     | Breaks | I worked on
+:-----:|:------:|:-------:|:-------:|:------:|:------
+20.11. | 01:16h | 11:08   | 12:24   | 00:00h | Part 9 a
+
 <!--
-.11. | 00:00h | :   | 00:00   | 00:00h | Part 8 
+.11. | 00:00h | :   | 00:00   | 00:00h | Part 9 
 -->
 
 Time = end - begin - breaks.
