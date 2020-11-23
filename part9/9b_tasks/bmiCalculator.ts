@@ -1,9 +1,4 @@
-const checkArguments = (args: string[]): void => {
-  if (args.length > 4) throw new Error('Too many arguments');
-  if (args.length < 4) throw new Error('Too few arguments');
-}
-
-const parseArgument = (argument: string): number => {
+export const parseArgument = (argument: string): number => {
   if (!isNaN(Number(argument))) {
     return Number(argument);
   } else {
@@ -37,8 +32,20 @@ const calculateBmi = (a: number, b: number): string => {
   return 'Obese Class III (Very severely obese)';
 }
 
-checkArguments(process.argv);
-const height: number = parseArgument(process.argv[2]);
-const weight: number = parseArgument(process.argv[3]);
+interface Response {
+  height: number;
+  weight: number;
+  bmi: string;
+}
 
-console.log(calculateBmi(height, weight));
+export const runApplication = (height: number, weight: number): Response => {
+  const bmi: string = calculateBmi(height, weight);
+
+  return {
+    weight,
+    height,
+    bmi
+  }
+}
+
+export default runApplication
