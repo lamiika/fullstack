@@ -4,7 +4,7 @@ export const parseArgument = (argument: string): number => {
   } else {
     throw new Error(`Provided value ${argument} was not a number`);
   }
-}
+};
 
 const calculateBmi = (a: number, b: number): string => {
   const result: number = b / (a / 100)**2;
@@ -30,7 +30,7 @@ const calculateBmi = (a: number, b: number): string => {
     return 'Obese Class II (Severely obese)';
   }
   return 'Obese Class III (Very severely obese)';
-}
+};
 
 interface Response {
   height: number;
@@ -45,7 +45,7 @@ export const runApplication = (height: number, weight: number): Response => {
     weight,
     height,
     bmi
-  }
-}
+  };
+};
 
-export default runApplication
+export default runApplication;

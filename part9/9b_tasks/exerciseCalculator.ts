@@ -8,11 +8,11 @@ interface Result {
   ratingDescription: string;
   averageTime: number;
   targetAverageTime: number;
-};
+}
 
 const checkArguments = (args: string[]): void => {
   if (args.length < 4) throw new Error('Too few arguments');
-}
+};
 
 const parseArgument = (argument: string): number => {
   if (!isNaN(Number(argument))) {
@@ -20,7 +20,7 @@ const parseArgument = (argument: string): number => {
   } else {
     throw new Error(`Provided value ${argument} was not a number`);
   }
-}
+};
 
 const calculateExercises = (exerciseHours: number[], targetAverageTime: number): Result => {
   const periodLength: number = exerciseHours.length;
@@ -62,8 +62,8 @@ const calculateExercises = (exerciseHours: number[], targetAverageTime: number):
     ratingDescription,
     averageTime,
     targetAverageTime
-  }
-}
+  };
+};
 
 checkArguments(process.argv);
 const targetAverageTime: number = parseArgument(process.argv[2]);
