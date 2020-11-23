@@ -10,6 +10,18 @@ interface Result {
   targetAverageTime: number;
 };
 
+const checkArguments = (args: string[]): void => {
+  if (args.length < 4) throw new Error('Too few arguments');
+}
+
+const parseArgument = (argument: string): number => {
+  if (!isNaN(Number(argument))) {
+    return Number(argument);
+  } else {
+    throw new Error(`Provided value ${argument} was not a number`);
+  }
+}
+
 const calculateExercises = (exerciseHours: number[], targetAverageTime: number): Result => {
   const periodLength: number = exerciseHours.length;
   const trainingDays: number = exerciseHours.filter(e => e > 0).length;
@@ -53,4 +65,10 @@ const calculateExercises = (exerciseHours: number[], targetAverageTime: number):
   }
 }
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2));
+checkArguments(process.argv);
+const targetAverageTime: number = parseArgument(process.argv[2]);
+const exerciseHours: number[] = process.argv.slice(3).map(arg =>
+  parseArgument(arg)
+);
+
+console.log(calculateExercises(exerciseHours, targetAverageTime));

@@ -1,3 +1,16 @@
+const checkArguments = (args: string[]): void => {
+  if (args.length > 4) throw new Error('Too many arguments');
+  if (args.length < 4) throw new Error('Too few arguments');
+}
+
+const parseArgument = (argument: string): number => {
+  if (!isNaN(Number(argument))) {
+    return Number(argument);
+  } else {
+    throw new Error(`Provided value ${argument} was not a number`);
+  }
+}
+
 const calculateBmi = (a: number, b: number): string => {
   const result: number = b / (a / 100)**2;
   if (result < 15) {
@@ -24,5 +37,8 @@ const calculateBmi = (a: number, b: number): string => {
   return 'Obese Class III (Very severely obese)';
 }
 
-console.log(calculateBmi(180, 74));
-//Normal (healthy weight)
+checkArguments(process.argv);
+const height: number = parseArgument(process.argv[2]);
+const weight: number = parseArgument(process.argv[3]);
+
+console.log(calculateBmi(height, weight));
