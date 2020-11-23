@@ -1,11 +1,3 @@
-export const parseArgument = (argument: string): number => {
-  if (!isNaN(Number(argument))) {
-    return Number(argument);
-  } else {
-    throw new Error(`Provided value ${argument} was not a number`);
-  }
-};
-
 const calculateBmi = (a: number, b: number): string => {
   const result: number = b / (a / 100)**2;
   if (result < 15) {

@@ -1,8 +1,8 @@
 ## Timelog of the working hours 2020
 
-### Entire time used: **161:53** hours
+### Entire time used: **167:12** hours
 
-Last updated on 20.11.2020
+Last updated on 23.11.2020
 
 ### Part 0 and 1 (12:56h)
 
@@ -118,14 +118,14 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 17.11. | 00:49h | 10:18   | 11:10   | 00:03h | Part 8 e
 19.11. | 01:44h | 11:11   | 13:03   | 00:08h | Part 8 e
 
-### Part 9 (03:49h)
+### Part 9 (09:08h)
 
 Day    | Time   | Begin   | End     | Breaks | I worked on
 :-----:|:------:|:-------:|:-------:|:------:|:------
 20.11. | 01:16h | 11:08   | 12:24   | 00:00h | Part 9 a
 20.11. | 02:33h | 12:45   | 15:58   | 00:40h | Part 9 b
 23.11. | 03:36h | 08:40   | 12:51   | 00:35h | Part 9 b
-23.11. | 00:00h | 14:51   | 00:00   | 00:00h | Part 9 b 
+23.11. | 01:43h | 14:51   | 16:34   | 00:00h | Part 9 b 
 
 <!--
 .11. | 00:00h | :   | 00:00   | 00:00h | Part 9 
