@@ -4,5 +4,6 @@
     "editor.acceptSuggestionOnCommitCharacter": false,
     "editor.acceptSuggestionOnEnter": "off",
     "editor.parameterHints.enabled": false,
-    "eslint.enable": true
+    "eslint.enable": true,
+    "typescript.tsdk": "./part9/course_information/node_modules/typescript/lib"
 }
