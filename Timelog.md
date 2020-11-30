@@ -1,6 +1,6 @@
 ## Timelog of the working hours 2020
 
-### Entire time used: **174:26** hours
+### Entire time used: **177:17** hours
 
 Last updated on 24.11.2020
 
@@ -118,7 +118,11 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 17.11. | 00:49h | 10:18   | 11:10   | 00:03h | Part 8 e
 19.11. | 01:44h | 11:11   | 13:03   | 00:08h | Part 8 e
 
-### Part 9 (16:23h)
+<!--
+158:04h until p9
+-->
+
+### Part 9 (19:13h)
 
 Day    | Time   | Begin   | End     | Breaks | I worked on
 :-----:|:------:|:-------:|:-------:|:------:|:------
@@ -130,15 +134,10 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 25.11. | 01:05h | 10:44   | 11:49   | 00:00h | Part 9 c
 25.11. | 01:00h | 12:51   | 13:51   | 00:00h | Part 9 d
 27.11. | 00:51h | 08:00   | 08:51   | 00:00h | Part 9 d
-27.11. | 00:00h | 13:00   | 15:10   | 00:10h | Part 9 d
+27.11. | 02:00h | 13:00   | 15:10   | 00:10h | Part 9 d
 
 <!--
 .11. | 00:00h | :   | 00:00   | 00:00h | Part 9 
 -->
 
 Time = end - begin - breaks.
-
-### Goals
-- Part 6 completed by 18.10.
-- Part 7 completed by 25.10.
-- Complete the entire course by the end of November (parts 8, 9 and 10)
