@@ -1,6 +1,6 @@
 [submodule "part9/patientor/frontend"]
 	path = part9/patientor/frontend
-	url = https://github.com/lamiika/notes_backend_part3
+	url = https://github.com/lamiika/patientor
 
 [submodule "part4/notes_backend"]
 	path = part4/notes_backend
@@ -8,4 +8,4 @@
 
 [submodule "part3/practice_tasks/notes_backend"]
 	path = part3/practice_tasks/notes_backend
-	url = https://github.com/lamiika/patientor
+	url = https://github.com/lamiika/notes_backend_part3
