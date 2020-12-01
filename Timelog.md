@@ -2,7 +2,7 @@
 
 ### Entire time used: **177:17** hours
 
-Last updated on 24.11.2020
+Last updated on 27.11.2020
 
 ### Part 0 and 1 (12:56h)
 
@@ -135,9 +135,10 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 25.11. | 01:00h | 12:51   | 13:51   | 00:00h | Part 9 d
 27.11. | 00:51h | 08:00   | 08:51   | 00:00h | Part 9 d
 27.11. | 02:00h | 13:00   | 15:10   | 00:10h | Part 9 d
+01.12. | 00:00h | 10:34   | 13:48   | 00:26h | Part 9 d
 
 <!--
-.11. | 00:00h | :   | 00:00   | 00:00h | Part 9 
+.12. | 00:00h | :   | 00:00   | 00:00h | Part 9 
 -->
 
 Time = end - begin - breaks.
