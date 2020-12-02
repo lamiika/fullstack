@@ -4,12 +4,6 @@ export enum Gender {
   Other = 'other'
 }
 
-export enum EntryType {
-  Hospital = 'Hospital',
-  OccupationalHealthcare = 'OccupationalHealthcare',
-  HealthCheck = 'HealthCheck'
-}
-
 export interface Diagnosis {
   code: string;
   name: string;
@@ -22,6 +16,12 @@ interface BaseEntry {
   date: string;
   specialist: string;
   diagnosisCodes?: Array<Diagnosis['code']>;
+}
+
+export enum EntryType {
+  Hospital = "Hospital",
+  OccupationalHealthcare = "OccupationalHealthcare",
+  HealthCheck = "HealthCheck"
 }
 
 export enum HealthCheckRating {
