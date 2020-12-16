@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NewPatient, Gender, NewEntry, NewBaseEntry,
-  Diagnosis, Discharge, SickLeave } from "./types";
+  Diagnosis, Discharge, SickLeave, HealthCheckRating } from "./types";
 
 const isString = (text: any): text is string => {
   return typeof text === "string" || text instanceof String;
@@ -49,11 +49,11 @@ export const newPatientValidate = ( object: any ): NewPatient => {
   };
 };
 
-const areDiagnosisCodes = ( diagnosisCodes: any[] ): diagnosisCodes is Array<Diagnosis["code"]> {
+const areDiagnosisCodes = ( diagnosisCodes: any[] ): diagnosisCodes is Array<Diagnosis["code"]> => {
   return diagnosisCodes.every(diagnosis => parseString(diagnosis, "diagnosis"));
 };
 
-const parseDiagnosisCodes = ( diagnosisCodes: any ): Array<Diagnosis["code"]> {
+const parseDiagnosisCodes = ( diagnosisCodes: any ): Array<Diagnosis["code"]> => {
   if (!diagnosisCodes.isArray || !areDiagnosisCodes(diagnosisCodes)) {
     throw new Error("Incorrect or missing diagnosisCodes: " + diagnosisCodes)
   }
@@ -74,7 +74,7 @@ const baseEntryValidate = ( object: any ): NewBaseEntry => {
   return {
     ...baseEntryBase,
     diagnosisCodes: parseDiagnosisCodes(object.diagnosisCodes)
-  }
+  };
 };
 
 const parseDischarge = (discharge: any): Discharge => {
@@ -83,8 +83,8 @@ const parseDischarge = (discharge: any): Discharge => {
   }
   return {
     date: parseDate(discharge.date),
-    criteria: parseString(discharge.criteria, "criteria");
-  }
+    criteria: parseString(discharge.criteria, "criteria")
+  };
 };
 
 const hospitalValidate = ( object: any ): NewEntry => {
@@ -92,14 +92,14 @@ const hospitalValidate = ( object: any ): NewEntry => {
     type: object.type,
     discharge: parseDischarge(object.discharge),
     ...baseEntryValidate(object)
-  }
+  };
 };
 
 const parseSickLeave = ( sickLeave: any ): SickLeave => {
   return {
     startDate: parseDate(sickLeave.startDate),
     endDate: parseDate(sickLeave.endDate)
-  }
+  };
 };
 
 const occupationalValidate = ( object: any ): NewEntry => {
@@ -108,7 +108,26 @@ const occupationalValidate = ( object: any ): NewEntry => {
     employerName: parseString(object.employerName, "employerName"),
     sickLeave: parseSickLeave(object.sickLeave),
     ...baseEntryValidate(object)
+  };
+};
+
+const isRating = ( rating: any): rating is HealthCheckRating => {
+  return Object.keys(HealthCheckRating).includes(rating);
+};
+
+const parseRating = ( rating: any ): HealthCheckRating => {
+  if (!rating || !isRating(rating)) {
+    throw new Error("Incorrect or missing healthCheckRating: " + rating);
   }
+  return rating;
+};
+
+const healthCheckValidate = ( object: any ): NewEntry => {
+  return {
+    type: object.type,
+    healthCheckRating: parseRating(object.healthCheckRating),
+    ...baseEntryValidate(object)
+  };
 };
 
 export const newEntryValidate = ( object: any ): NewEntry => {
@@ -122,7 +141,7 @@ export const newEntryValidate = ( object: any ): NewEntry => {
     return occupationalValidate(object);
   }
   if (object.entry === "HealthCheck") {
-
+    return healthCheckValidate(object);
   }
   throw new Error("Incorrect entry type: " + object.type);
-}
+};
