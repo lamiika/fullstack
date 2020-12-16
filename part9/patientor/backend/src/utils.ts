@@ -1,32 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { NewPatient, Gender, Entry, EntryType } from './types';
+import { NewPatient, Gender, NewEntry, NewBaseEntry, Diagnosis, Discharge } from "./types";
 
 const isString = (text: any): text is string => {
-  return typeof text === 'string' || text instanceof String;
+  return typeof text === "string" || text instanceof String;
 };
 
-const parseName = (name: any): string => {
-  if (!name || !isString(name)) {
-    throw new Error('Incorrect or missing name: ' + name);
+const parseString = (text: any, type: string): string => {
+  if (!text || !isString(text)) {
+    throw new Error(`Incorrect or missing ${type}: ` + text);
   }
 
-  return name;
-};
-
-const parseSsn = (ssn: any): string => {
-  if (!ssn || !isString(ssn)) {
-    throw new Error('Incorrect or missing ssn ' + ssn);
-  }
-
-  return ssn;
-};
-
-const parseOccupation = (occupation: any): string => {
-  if (!occupation || !isString(occupation)) {
-    throw new Error('Incorrect or missing occupation ' + occupation);
-  }
-
-  return occupation;
+  return text;
 };
 
 const isDate = (date: string): boolean => {
@@ -35,7 +19,7 @@ const isDate = (date: string): boolean => {
 
 const parseDate = (date: any): string => {
   if (!date || !isString(date) || !isDate(date)) {
-    throw new Error('Incorrect or missing date of birth: ' + date);
+    throw new Error("Incorrect or missing date of birth: " + date);
   }
 
   return date;
@@ -47,38 +31,102 @@ const isGender = (gender: any): gender is Gender => {
 
 const parseGender = (gender: any): Gender => {
   if (!gender || !isGender(gender)) {
-    throw new Error('Incorrect or missing gender: ' + gender);
+    throw new Error("Incorrect or missing gender: " + gender);
   }
 
   return gender;
 };
 
-const isEntryType = (type: any): type is EntryType => {
-  return Object.values(EntryType).includes(type);
-};
-
-const parseEntryType = (type: any): EntryType => {
-  if (!type || !isEntryType(type)) {
-    throw new Error('Incorrect or missing entry type: ' + type);
-  }
-
-  return type;
-};
-
 export const newPatientValidate = ( object: any ): NewPatient => {
   return {
-    name: parseName(object.name),
+    name: parseString(object.name, "name"),
     dateOfBirth: parseDate(object.dateOfBirth),
-    ssn: parseSsn(object.ssn),
+    ssn: parseString(object.ssn, "ssn"),
     gender: parseGender(object.gender),
-    occupation: parseOccupation(object.occupation),
+    occupation: parseString(object.occupation, "occupation"),
     entries: []
   };
 };
 
-export const newEntryValidate = ( object: any ): Entry => {
-  return {
-    ...object,
-    type: parseEntryType
+const areDiagnosisCodes = ( diagnosisCodes: any[] ): diagnosisCodes is Array<Diagnosis["code"]> {
+  return diagnosisCodes.every(diagnosis => parseString(diagnosis, "diagnosis"));
+};
+
+const parseDiagnosisCodes = ( diagnosisCodes: any ): Array<Diagnosis["code"]> {
+  if (!diagnosisCodes.isArray || !areDiagnosisCodes(diagnosisCodes)) {
+    throw new Error("Incorrect or missing diagnosisCodes: " + diagnosisCodes)
   }
+  return diagnosisCodes;
+};
+
+const baseEntryValidate = ( object: any ): NewBaseEntry => {
+  const baseEntryBase: NewBaseEntry = {
+    description: parseString(object.description, "description"),
+    date: parseDate(object.date),
+    specialist: parseString(object.specialist, "specialist")
+  }
+
+  if (!object.diagnosisCodes || (object.diagnosisCodes.isArray &&
+      object.diagnosisCodes.length === 0)) {
+    return baseEntryBase;
+  }
+  return {
+    ...baseEntryBase,
+    diagnosisCodes: parseDiagnosisCodes(object.diagnosisCodes)
+  }
+};
+
+const parseDischarge = (discharge: any): Discharge => {
+  if (!discharge) {
+    throw new Error("Missing discharge :" + discharge);
+  }
+  return {
+    date: parseDate(discharge.date),
+    criteria: parseString(discharge.criteria, "criteria");
+  }
+};
+
+const hospitalValidate = ( object: any ): NewEntry => {
+  return {
+    type: object.type,
+    discharge: parseDischarge(object.discharge),
+    ...baseEntryValidate(object)
+  }
+};
+
+export const newEntryValidate = ( object: any ): NewEntry => {
+  if (!object.entry) {
+    throw new Error("Missing entry type: " + object.type);
+  }
+  if (object.entry === "Hospital") {
+    return hospitalValidate(object);
+  }
+  if (object.entry === "OccupationalHealthcare") {
+
+  }
+  if (object.entry === "HealthCheck") {
+
+  }
+  throw new Error("Incorrect entry type: " + object.type);
 }
+
+/*
+const isEntryType = (type: any): type is EntryType => {
+  return Object.values(EntryType).includes(type);
+};
+
+const parseEntryType = (object: any): NewEntry => {
+  if (!object.type || !isEntryType(object.type)) {
+    throw new Error('Incorrect or missing entry type: ' + object.type);
+  }
+  const type: EntryType = object.type;
+  if (type === "Hospital") {
+    return {
+      parseHospital(object)
+  }
+
+  return object;
+};
+
+const entryTypeValidate = ( object: any ): NewEntry
+*/

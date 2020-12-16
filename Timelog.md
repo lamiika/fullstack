@@ -1,8 +1,8 @@
 ## Timelog of the working hours 2020
 
-### Entire time used: **191:59** hours
+### Entire time used: **194:33** hours
 
-Last updated on 03.12.2020
+Last updated on 14.12.2020
 
 ### Part 0 and 1 (12:56h)
 
@@ -122,7 +122,7 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 158:04h until p9
 -->
 
-### Part 9 (33:55h)
+### Part 9 (36:29h)
 
 Day    | Time   | Begin   | End     | Breaks | I worked on
 :-----:|:------:|:-------:|:-------:|:------:|:------
@@ -138,10 +138,13 @@ Day    | Time   | Begin   | End     | Breaks | I worked on
 01.12. | 05:28h | 10:34   | 17:02   | 01:00h | Part 9 d
 02.12. | 05:31h | 09:27   | 16:08   | 01:10h | Part 9 d
 03.12. | 03:43h | 11:27   | 16:05   | 00:55h | Part 9 d
-04.12. | 00:00h | 11:24   | 11:55   | 00:00h | Part 9 d
+04.12. | 00:31h | 11:24   | 11:55   | 00:00h | Part 9 d
+14.12. | 01:05h | 14:00   | 15:05   | 00:00h | Part 9 d
+15.12. | 00:58h | 11:00   | 11:58   | 00:00h | Part 9 d
+16.12. | 00:00h | 11:03   | 13:58   | 00:15h | Part 9 d
 
 <!--
-.12. | 00:00h | :   | 00:00   | 00:00h | Part 9 
+.12. | 00:00h | :   | 00:00   | 00:00h | Part 9 d
 -->
 
 Time = end - begin - breaks.

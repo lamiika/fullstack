@@ -23,4 +23,9 @@ router.post('/', (req, res) => {
   }
 });
 
+router.post('/:id/entries', (req, res) => {
+  const addedEntry = patientService.addEntry(req.params.id, req.body);
+  res.json(addedEntry);
+});
+
 export default router;
