@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { NewPatient, Gender, NewEntry, NewBaseEntry, Diagnosis, Discharge } from "./types";
+import { NewPatient, Gender, NewEntry, NewBaseEntry,
+  Diagnosis, Discharge, SickLeave } from "./types";
 
 const isString = (text: any): text is string => {
   return typeof text === "string" || text instanceof String;
@@ -94,6 +95,22 @@ const hospitalValidate = ( object: any ): NewEntry => {
   }
 };
 
+const parseSickLeave = ( sickLeave: any ): SickLeave => {
+  return {
+    startDate: parseDate(sickLeave.startDate),
+    endDate: parseDate(sickLeave.endDate)
+  }
+};
+
+const occupationalValidate = ( object: any ): NewEntry => {
+  return {
+    type: object.type,
+    employerName: parseString(object.employerName, "employerName"),
+    sickLeave: parseSickLeave(object.sickLeave),
+    ...baseEntryValidate(object)
+  }
+};
+
 export const newEntryValidate = ( object: any ): NewEntry => {
   if (!object.entry) {
     throw new Error("Missing entry type: " + object.type);
@@ -102,31 +119,10 @@ export const newEntryValidate = ( object: any ): NewEntry => {
     return hospitalValidate(object);
   }
   if (object.entry === "OccupationalHealthcare") {
-
+    return occupationalValidate(object);
   }
   if (object.entry === "HealthCheck") {
 
   }
   throw new Error("Incorrect entry type: " + object.type);
 }
-
-/*
-const isEntryType = (type: any): type is EntryType => {
-  return Object.values(EntryType).includes(type);
-};
-
-const parseEntryType = (object: any): NewEntry => {
-  if (!object.type || !isEntryType(object.type)) {
-    throw new Error('Incorrect or missing entry type: ' + object.type);
-  }
-  const type: EntryType = object.type;
-  if (type === "Hospital") {
-    return {
-      parseHospital(object)
-  }
-
-  return object;
-};
-
-const entryTypeValidate = ( object: any ): NewEntry
-*/
