@@ -54,7 +54,7 @@ const areDiagnosisCodes = ( diagnosisCodes: any[] ): diagnosisCodes is Array<Dia
 };
 
 const parseDiagnosisCodes = ( diagnosisCodes: any ): Array<Diagnosis["code"]> => {
-  if (!diagnosisCodes.isArray || !areDiagnosisCodes(diagnosisCodes)) {
+  if (!Array.isArray(diagnosisCodes) || !areDiagnosisCodes(diagnosisCodes)) {
     throw new Error("Incorrect or missing diagnosisCodes: " + diagnosisCodes)
   }
   return diagnosisCodes;
@@ -67,7 +67,7 @@ const baseEntryValidate = ( object: any ): NewBaseEntry => {
     specialist: parseString(object.specialist, "specialist")
   }
 
-  if (!object.diagnosisCodes || (object.diagnosisCodes.isArray &&
+  if (!object.diagnosisCodes || (Array.isArray(object.diagnosisCodes) &&
       object.diagnosisCodes.length === 0)) {
     return baseEntryBase;
   }
@@ -131,16 +131,16 @@ const healthCheckValidate = ( object: any ): NewEntry => {
 };
 
 export const newEntryValidate = ( object: any ): NewEntry => {
-  if (!object.entry) {
+  if (!object.type) {
     throw new Error("Missing entry type: " + object.type);
   }
-  if (object.entry === "Hospital") {
+  if (object.type === "Hospital") {
     return hospitalValidate(object);
   }
-  if (object.entry === "OccupationalHealthcare") {
+  if (object.type === "OccupationalHealthcare") {
     return occupationalValidate(object);
   }
-  if (object.entry === "HealthCheck") {
+  if (object.type === "HealthCheck") {
     return healthCheckValidate(object);
   }
   throw new Error("Incorrect entry type: " + object.type);

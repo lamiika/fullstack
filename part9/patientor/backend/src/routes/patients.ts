@@ -25,6 +25,7 @@ router.post('/', (req, res) => {
 
 router.post('/:id/entries', (req, res) => {
   try {
+    console.log(req.body);
     const newEntryInfo = newEntryValidate(req.body);
 
     const addedEntry = patientService.addEntry(req.params.id, newEntryInfo);
