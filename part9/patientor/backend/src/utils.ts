@@ -119,7 +119,7 @@ const occupationalValidate = ( object: any ): NewEntry => {
 };
 
 const isRating = ( rating: any): rating is HealthCheckRating => {
-  return Object.keys(HealthCheckRating).includes(rating);
+  return Object.values(HealthCheckRating).includes(rating);
 };
 
 const parseRating = ( rating: any ): HealthCheckRating => {
