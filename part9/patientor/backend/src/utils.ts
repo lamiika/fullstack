@@ -103,6 +103,13 @@ const parseSickLeave = ( sickLeave: any ): SickLeave => {
 };
 
 const occupationalValidate = ( object: any ): NewEntry => {
+  if (!object.sickLeave.startDate && !object.sickLeave.endDate) {
+    return {
+      type: object.type,
+      employerName: parseString(object.employerName, "employerName"),
+      ...baseEntryValidate(object)
+    }
+  }
   return {
     type: object.type,
     employerName: parseString(object.employerName, "employerName"),
